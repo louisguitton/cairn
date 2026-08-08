@@ -1,0 +1,11 @@
+cairn
+Copyright (c) 2026 Louis Guitton
+
+Portions of the CLI architecture (command structure, tool detector, embedded
+template manager, generation strategies, uninstall flow) are derived from
+OpenSPDD (https://github.com/gszhangwei/open-spdd), MIT License,
+Copyright (c) 2026 gszhangwei.
+
+The method implemented by the command templates is based on concepts from
+IBM Enterprise Design Thinking (Hills, Playbacks, Sponsor Users, the Loop).
+This project is not affiliated with or endorsed by IBM.
