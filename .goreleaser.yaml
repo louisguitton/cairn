@@ -1,0 +1,59 @@
+version: 2
+
+project_name: cairn
+
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  - main: ./cmd/cairn
+    binary: cairn
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - darwin
+      - windows
+    goarch:
+      - amd64
+      - arm64
+    ldflags:
+      - -s -w -X main.version={{.Version}}
+
+archives:
+  - format: tar.gz
+    name_template: >-
+      {{ .ProjectName }}_
+      {{- .Version }}_
+      {{- .Os }}_
+      {{- .Arch }}
+    format_overrides:
+      - goos: windows
+        format: zip
+
+checksum:
+  name_template: "checksums.txt"
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"
+      - "^chore:"
+
+brews:
+  - name: cairn
+    repository:
+      owner: louisguitton
+      name: homebrew-tools
+      token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
+    directory: Formula
+    homepage: "https://github.com/louisguitton/cairn"
+    description: "Prompt-driven Product Design Thinking kit on the IBM EDT Loop"
+    license: "MIT"
+    install: |
+      bin.install "cairn"
+    test: |
+      system "#{bin}/cairn", "--version"
