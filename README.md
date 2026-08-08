@@ -24,7 +24,14 @@ Five agent commands mapped onto the EDT Loop (Observe → Reflect → Make). Eac
 | `/cairn-handoff` | Make           | Prototype brief · story set · SPDD input                           | build kickoff                |
 | `/cairn-sync`    | Make → Observe | Decision rows + canvas updates from diffs/transcripts/notes        | iteration playback           |
 
-Beta: `/cairn-reverse` — reverse-engineer an existing prototype into a draft canvas (everything labelled Assumed until validated).
+Beta commands are opt-in — `generate --all` installs the five core stages only:
+
+```bash
+cairn list --beta                 # see what's available
+cairn generate cairn-reverse      # install one by name
+```
+
+`/cairn-reverse` reverse-engineers an existing prototype into a draft canvas, every reconstructed claim labelled Assumed until a playback validates it.
 
 Key mechanics:
 

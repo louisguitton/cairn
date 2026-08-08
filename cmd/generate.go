@@ -23,7 +23,10 @@ var generateCmd = &cobra.Command{
 	Long: `Generate a command template file to the detected AI tool's config directory.
 If no template name is specified, an interactive selection will be shown.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		if outputFlag == "" && toolFlag == "" {
+		// Only ask when we genuinely do not know: an explicit --output or
+		// --tool wins, and a successful auto-detection is an answer too.
+		// Prompting anyway broke every non-interactive use (CI, scripts).
+		if outputFlag == "" && toolFlag == "" && !detectedResult.IsValid {
 			tool := selectToolInteractively()
 			if tool == detector.Unknown {
 				uiRenderer.RenderError("No tool selected. Use --output or --tool flag.")
