@@ -21,8 +21,9 @@ If no input given, ask which of the three exists and stop.
 
 ## Config
 
-1. Read `.cairn.yaml`. Resolve the target canvas under `bindings.specs` (ask which feature if ambiguous); fallback `design/canvas/`.
+1. Read `.cairn.yaml`, then locate the work: the canvas at `<home>/canvas.md`, taken from the input artefact's `Work` header. Given only raw input (a transcript, a diff), list the candidate work folders under `bindings.specs` and **ask which one this belongs to** — never guess.
 2. `proto_repo.path` → where to run diff inspection for input (a).
+3. `bindings.capture` → file a dated copy of the raw transcript or notes there, and cite that path in Sources.
 
 ## Steps
 

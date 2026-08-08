@@ -15,7 +15,7 @@ Read an **existing prototype** (the request arrived as an implementation, not a 
 
 ## Config
 
-Read `.cairn.yaml`: canvas target under `bindings.specs` (fallback `design/canvas/`); macro hills via `bindings.hills` (read-only) for the ladder guess.
+Read `.cairn.yaml`. Establish the work identity the way `/cairn-intake` does — propose ticket, slug and home folder under `bindings.specs`, and **ask the user to confirm before writing**. Artefacts go to `<home>/hill.md` and `<home>/canvas.md`. Macro hills via `bindings.hills` (read-only) for the ladder guess.
 
 ## Steps
 

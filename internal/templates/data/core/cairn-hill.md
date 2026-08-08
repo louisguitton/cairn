@@ -15,10 +15,11 @@ Reframe what Observe collected into a **Hill artefact**: problem statement, need
 
 ## Config
 
-1. Read `.cairn.yaml`. Resolve:
-   - `bindings.hills` → the **macro hill register**. Read it; NEVER write it. If unbound, there are no macro hills yet — see step 2 fallback.
-   - `bindings.specs` set → write the artefact to `{specs}/{epic-or-slug}/hill.md`; unbound → `design/hill/{TICKET}-{YYYYMMDDHHmm}-[Hill]-{slug}.md`.
-2. Prepend `gating.frontmatter` template if declared.
+1. Read `.cairn.yaml`, then take the **work identity from the input artefact's `Work` header** — the home folder, ticket and slug. Reuse them exactly; never re-derive a slug or invent a second folder for the same work.
+   - Input has no `Work` header (entered mid-pipeline) → propose ticket, slug and home the way `/cairn-intake` does, and **ask the user to confirm before writing**.
+2. Write to `<home>/hill.md`.
+3. `bindings.hills` → the **macro hill register**. Read it; NEVER write it. Unbound → no macro hills exist yet; see step 2 of Steps.
+4. Prepend `gating.frontmatter` template if declared.
 
 ## Steps
 
@@ -56,6 +57,7 @@ Reframe what Observe collected into a **Hill artefact**: problem statement, need
 
 |            |                                              |
 | ---------- | -------------------------------------------- |
+| Work       | {ticket} · `{home folder}` · slug `{slug}`   |
 | Ladders to | {macro id + one-line quote of its What}      |
 | Timeframe  | {day/week/sprint}                            |
 | Entered at | {intake → hill / hill (skipped intake, why)} |
@@ -92,6 +94,8 @@ Reframe what Observe collected into a **Hill artefact**: problem statement, need
 | #   | Assumption | Certainty | Risk | Validation plan (if uncertain+high) |
 | --- | ---------- | --------- | ---- | ----------------------------------- |
 ```
+
+The `Work` row is the identity every later stage inherits — same ticket, same folder, same slug. Never restate it differently.
 
 ## Gate (hard stop)
 

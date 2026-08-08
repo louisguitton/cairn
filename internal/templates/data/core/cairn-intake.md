@@ -15,11 +15,15 @@ Turn a raw stakeholder request into an **Intake Brief**: a one-page diagnosis of
 
 ## Config
 
-1. Read `.cairn.yaml` from the repo root (search upward). Resolve the artefact path:
-   - `bindings.capture` set → write the brief there (it is a dated, append-only capture area — never edit existing files in it).
-   - Unbound → write to `design/intake/` (create if missing).
-2. File name: `{TICKET}-{YYYYMMDDHHmm}-[Intake]-{kebab-slug}.md` (use the ticket key if one is mentioned, else `XXX`).
-3. If `gating.frontmatter` points to a template, prepend that frontmatter to the artefact.
+1. Read `.cairn.yaml` from the repo root (search upward).
+2. **Establish the work identity — before writing anything.** This command names the work; every later stage inherits that name and must never re-derive it.
+   - **Ticket**: take the key from the request (e.g. `APP-4947`). None mentioned → ask for one, and only fall back to `XXX` if the user says there isn't one.
+   - **Slug**: 3–6 kebab-case words naming the outcome, not the mechanism.
+   - **Home**: `{specs}/<existing stream>/<existing epic folder>/<slug>/` when `bindings.specs` is set — list the real subfolders and place the work under the matching one. Unbound → `design/<slug>/`.
+   - Show the full proposed path plus ticket and slug, and **ask the user to confirm or edit it**. Do not write until they answer.
+3. Write the brief to `<home>/intake.md`. All stage artefacts for this work live in that one folder.
+4. `bindings.capture` is for **raw source material** only (transcripts, stakeholder dumps). If the user supplied raw input worth keeping, file a dated copy there and cite it; never put the brief itself there.
+5. If `gating.frontmatter` points to a template, prepend that frontmatter to the artefact.
 
 ## Steps
 
@@ -55,6 +59,7 @@ Turn a raw stakeholder request into an **Intake Brief**: a one-page diagnosis of
 
 |                        |                                                            |
 | ---------------------- | ---------------------------------------------------------- |
+| Work                   | {ticket} · `{home folder}` · slug `{slug}`                 |
 | Date                   | {date}                                                     |
 | Stakeholder            | {who, role}                                                |
 | Input class            | {solution/feature/outcome-shaped / prototype / transcript} |
@@ -94,6 +99,8 @@ Turn a raw stakeholder request into an **Intake Brief**: a one-page diagnosis of
 
 {5–7 questions, top gap first, incl. one 5-Whys chain + sponsor-user probe}
 ```
+
+The `Work` row is the identity every later stage inherits — same ticket, same folder, same slug. Never restate it differently.
 
 ## Gate (hard stop)
 

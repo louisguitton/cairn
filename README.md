@@ -31,6 +31,7 @@ Key mechanics:
 - **Hill Cascade** — macro hills (≤3 per release, read-only register) vs micro hills (day/week iterations, mandatory `ladders_to:`). Same Who/What/Wow grammar, no conflicts by construction.
 - **Decision Records** — one row per decision: driver (business / ux / feasibility / legal), owner, status, options considered, honest consequences.
 - **Repo variables** — `.cairn.yaml` binds a docs repo and a prototype repo, plus artefact paths (`hills`, `personas`, `specs`, `capture`). Works in any setup; unbound types fall back to a `design/` tree.
+- **One folder per piece of work** — `/cairn-intake` proposes a ticket, slug and home folder, you confirm it once, and every later stage writes beside it (`intake.md`, `hill.md`, `canvas.md`, `brief.md`, `stories.md`) instead of re-deriving its own path.
 - **Playback transcripts** are first-class sync input — the weekly sponsor-user hour lands in the canvas, not in someone's notebook.
 
 ## Install

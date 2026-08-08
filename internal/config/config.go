@@ -24,8 +24,8 @@ type RepoRole struct {
 type Bindings struct {
 	Hills     string `yaml:"hills,omitempty"`     // e.g. product/hills.md (macro hill register, read-only)
 	Personas  string `yaml:"personas,omitempty"`  // e.g. product/personas.md
-	Specs     string `yaml:"specs,omitempty"`     // e.g. product/specs (per-feature canvas folders)
-	Capture   string `yaml:"capture,omitempty"`   // e.g. stream (dated intake briefs)
+	Specs     string `yaml:"specs,omitempty"`     // e.g. product/specs (holds one folder per piece of work)
+	Capture   string `yaml:"capture,omitempty"`   // e.g. stream (dated raw source material)
 	Decisions string `yaml:"decisions,omitempty"` // e.g. decisions (ADR promotion target)
 	Glossary  string `yaml:"glossary,omitempty"`  // e.g. glossary.md
 }

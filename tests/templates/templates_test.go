@@ -188,3 +188,25 @@ func TestTemplatesForbidGitWritesAtTheGate(t *testing.T) {
 		}
 	}
 }
+
+// Stages must share one work identity. Intake names the work; everything
+// downstream inherits that name from the artefact header. Re-deriving a slug
+// per stage is what scattered the first real run across three identities.
+func TestTemplatesShareOneWorkIdentity(t *testing.T) {
+	mgr := templates.NewEmbeddedTemplateManager()
+	all, err := mgr.ListAll()
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	for _, tmpl := range all {
+		establishes := strings.Contains(tmpl.Content, "Establish the work identity") ||
+			strings.Contains(tmpl.Content, "identity the way `/cairn-intake` does")
+		inherits := strings.Contains(tmpl.Content, "work identity from the input artefact's `Work` header") ||
+			strings.Contains(tmpl.Content, "taken from the input artefact's `Work` header")
+
+		if !establishes && !inherits {
+			t.Errorf("%s: must either establish the work identity or inherit it", tmpl.ID)
+		}
+	}
+}

@@ -15,10 +15,10 @@ Assemble the **Design Canvas**: the single reviewable contract for a feature. It
 
 ## Config
 
-1. Read `.cairn.yaml`. Resolve:
-   - `bindings.specs` set → the canvas lives at `{specs}/{epic-or-slug}/canvas.md` (one canvas per feature — **update it in place** on re-runs, never fork a second one).
-   - Unbound → `design/canvas/{TICKET}-{YYYYMMDDHHmm}-[Canvas]-{slug}.md`; on update, edit the existing file.
-2. Prepend `gating.frontmatter` if declared. Read `bindings.glossary` for domain terms if bound.
+1. Read `.cairn.yaml`, then take the **work identity from the input artefact's `Work` header** — the home folder, ticket and slug. Reuse them exactly; never re-derive a slug or invent a second folder for the same work.
+   - Input has no `Work` header (entered mid-pipeline) → propose ticket, slug and home the way `/cairn-intake` does, and **ask the user to confirm before writing**.
+2. Write to `<home>/canvas.md` — one canvas per work, **updated in place** on re-runs. Never fork a second canvas.
+3. Prepend `gating.frontmatter` if declared. Read `bindings.glossary` for domain terms if bound.
 
 ## Steps
 
@@ -46,12 +46,13 @@ Assemble the **Design Canvas**: the single reviewable contract for a feature. It
 ````markdown
 # Canvas — {title}
 
-|            |                                          |
-| ---------- | ---------------------------------------- |
-| Hill       | **Who** {…} · **What** {…} · **Wow** {…} |
-| Ladders to | {macro id}                               |
-| Status     | draft                                    |
-| Sources    | {hill artefact, playback dates}          |
+|            |                                            |
+| ---------- | ------------------------------------------ |
+| Work       | {ticket} · `{home folder}` · slug `{slug}` |
+| Hill       | **Who** {…} · **What** {…} · **Wow** {…}   |
+| Ladders to | {macro id}                                 |
+| Status     | draft                                      |
+| Sources    | {hill artefact, playback dates}            |
 
 ## To-be journey
 
@@ -83,6 +84,8 @@ Assemble the **Design Canvas**: the single reviewable contract for a feature. It
 
 - Q1: {question} — resolved by {sponsor user / data / spike}
 ````
+
+The `Work` row is the identity every later stage inherits — same ticket, same folder, same slug. Never restate it differently.
 
 ## Gate (hard stop)
 

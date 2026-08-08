@@ -15,10 +15,11 @@ Convert a signed-off Design Canvas into **handoff artefacts**: a prototype brief
 
 ## Config
 
-1. Read `.cairn.yaml`. Resolve:
-   - Handoffs live next to the canvas: `{specs}/{epic}/brief.md` and `{specs}/{epic}/stories.md`; fallback `design/handoff/{TICKET}-{YYYYMMDDHHmm}-[Handoff]-{slug}.md`.
-   - `proto_repo.path` → the target the brief addresses (branch + route scheme).
-2. Prepend `gating.frontmatter` if declared.
+1. Read `.cairn.yaml`, then take the **work identity from the input artefact's `Work` header** — the home folder, ticket and slug. Reuse them exactly; never re-derive a slug or invent a second folder for the same work.
+   - Input has no `Work` header (entered mid-pipeline) → propose ticket, slug and home the way `/cairn-intake` does, and **ask the user to confirm before writing**.
+2. Write to `<home>/brief.md` and `<home>/stories.md`, next to the canvas they derive from.
+3. `proto_repo.path` → the target the brief addresses (branch + route scheme).
+4. Prepend `gating.frontmatter` if declared.
 
 ## Steps
 
@@ -49,6 +50,7 @@ Convert a signed-off Design Canvas into **handoff artefacts**: a prototype brief
 
 |          |                                                     |
 | -------- | --------------------------------------------------- |
+| Work     | {ticket} · `{home folder}` · slug `{slug}`          |
 | Hill     | {id}: **Wow** {…}                                   |
 | Question | {what this experiment answers}                      |
 | Target   | {proto repo} · branch `{name}` · route(s) `{/path}` |
@@ -72,6 +74,8 @@ Convert a signed-off Design Canvas into **handoff artefacts**: a prototype brief
 
 - Record decisions taken while building via /cairn-sync (transcript, notes, or diff).
 ````
+
+The `Work` row is the identity every later stage inherits — same ticket, same folder, same slug. Never restate it differently.
 
 ## Gate
 
