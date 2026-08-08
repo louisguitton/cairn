@@ -36,10 +36,14 @@ Key mechanics:
 ## Install
 
 ```bash
+# macOS
 brew install louisguitton/tools/cairn
-# or
+
+# any platform
 go install github.com/louisguitton/cairn/cmd/cairn@latest
 ```
+
+The tap ships a Homebrew **cask**, which is macOS-only. On Linux and Windows use `go install`, or grab a binary from [Releases](https://github.com/louisguitton/cairn/releases).
 
 ## Quick start
 

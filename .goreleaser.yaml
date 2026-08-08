@@ -22,7 +22,7 @@ builds:
       - -s -w -X main.version={{.Version}}
 
 archives:
-  - format: tar.gz
+  - formats: [tar.gz]
     name_template: >-
       {{ .ProjectName }}_
       {{- .Version }}_
@@ -30,7 +30,7 @@ archives:
       {{- .Arch }}
     format_overrides:
       - goos: windows
-        format: zip
+        formats: [zip]
 
 checksum:
   name_template: "checksums.txt"
@@ -43,17 +43,25 @@ changelog:
       - "^test:"
       - "^chore:"
 
-brews:
+# Casks, not formulas: Homebrew wants prebuilt binaries distributed as casks
+# in third-party taps. Casks are macOS-only — Linux users install via
+# `go install` or the release archives.
+homebrew_casks:
   - name: cairn
+    binaries: [cairn]
     repository:
       owner: louisguitton
       name: homebrew-tools
       token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
-    directory: Formula
+    directory: Casks
     homepage: "https://github.com/louisguitton/cairn"
     description: "Prompt-driven Product Design Thinking kit on the IBM EDT Loop"
     license: "MIT"
-    install: |
-      bin.install "cairn"
-    test: |
-      system "#{bin}/cairn", "--version"
+    hooks:
+      post:
+        # Strip the quarantine flag Gatekeeper adds to downloaded binaries,
+        # otherwise the first `cairn` run is blocked on macOS.
+        install: |
+          if system_command("/usr/bin/xattr", args: ["-h"]).exit_status == 0
+            system_command "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "#{staged_path}/cairn"]
+          end
