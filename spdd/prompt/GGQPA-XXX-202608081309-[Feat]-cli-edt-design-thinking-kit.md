@@ -1,4 +1,4 @@
-# cairn (working name) — Prompt-driven Product Design Thinking kit on the EDT Loop
+# cairn — Prompt-driven Product Design Thinking kit on the EDT Loop
 
 ## Requirements
 
@@ -9,7 +9,7 @@
 - `/cairn-sync` closes the Loop from three input classes: git diff / prototype directory, **playback-meeting transcript** (stakeholder/client/sponsor-user), loose decision notes — emitting decision rows (driver ∈ business|ux|feasibility|legal, owner, status, hill) and canvas updates.
 - Support **Claude Code, Cursor, Claude** at launch: flat-markdown command strategies for the first two, a skill-bundle emit strategy for Claude.
 - **Resolved decisions**: standalone binary, not an open-spdd fork; five agent commands over three Loop stages; Hill and Canvas as separate artefacts (separate gates); hard-stop gates (command writes artefact, prints playback summary, stops); English template structure, artefact content in user's language; docs repo always canonical, prototype addressed (branch + route) and harvested; no Jira API in core (beta command later); structure-first artefacts benchmarked on `agora/spdd/prompt/*` density; the resident IBM EDT skill is the mined predecessor, not a compatibility target.
-- **Boundaries**: no code generation (that is SPDD's job — handoff stops at `/spdd-analysis` input / story grammar); no portfolio-level prioritisation (assume a request exists; `cairn-discover` is a later beta command); no librarian integration; adoption is organic — no enforcement mechanics beyond the gates themselves; kit repo is `product-prompt` (public, akin to open-spdd).
+- **Boundaries**: no code generation (that is SPDD's job — handoff stops at `/spdd-analysis` input / story grammar); no portfolio-level prioritisation (assume a request exists; `cairn-discover` is a later beta command); no librarian integration; adoption is organic — no enforcement mechanics beyond the gates themselves; kit repo is `cairn` (public, akin to open-spdd).
 
 ## Entities
 
@@ -204,7 +204,7 @@ SyncInput --> DesignCanvas : /cairn-sync updates
 
 ## Structure
 
-### Package layout (kit repo `product-prompt`)
+### Package layout (kit repo `cairn`)
 
 ```
 cmd/cairn/main.go

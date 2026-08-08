@@ -30,4 +30,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: prettier check
-        run: npx --yes prettier@3 --check .
+        # Pinned to the version in .pre-commit-config.yaml so the hook and CI
+        # can never disagree about formatting.
+        run: npx --yes prettier@3.5.3 --check .
