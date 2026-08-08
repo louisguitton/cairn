@@ -14,13 +14,13 @@ Product specification with AI-assisted prototyping tends to fail the same way ev
 
 ## The method
 
-Five agent commands mapped onto the EDT Loop (Observe → Reflect → Make). Each writes **one markdown artefact**, prints a playback summary, and **stops** — the pause is the point.
+Five agent commands mapped onto the EDT Loop (Observe → Reflect → Make). Each writes **one markdown artefact**, prints a playback summary, and **stops** — the pause is the point. Artefacts land in your working tree; nothing is committed, pushed, or opened as a PR unless you ask.
 
 | Command          | Loop stage     | Artefact                                                           | Gate                         |
 | ---------------- | -------------- | ------------------------------------------------------------------ | ---------------------------- |
 | `/cairn-intake`  | Observe        | Intake Brief + copy-paste question block                           | stakeholder answers top gap  |
 | `/cairn-hill`    | Reflect        | Problem statement, needs, **micro hill**, as-is/to-be, assumptions | Hill playback (Who/What/Wow) |
-| `/cairn-canvas`  | Reflect → Make | **Design Canvas**: journey, decision records, MVE, signals         | Spec playback (PR merge)     |
+| `/cairn-canvas`  | Reflect → Make | **Design Canvas**: journey, decision records, MVE, signals         | Spec playback                |
 | `/cairn-handoff` | Make           | Prototype brief · story set · SPDD input                           | build kickoff                |
 | `/cairn-sync`    | Make → Observe | Decision rows + canvas updates from diffs/transcripts/notes        | iteration playback           |
 

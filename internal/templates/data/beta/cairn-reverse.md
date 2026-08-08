@@ -31,9 +31,19 @@ Read `.cairn.yaml`: canvas target under `bindings.specs` (fallback `design/canva
 
 ## Gate
 
-1. Write the draft canvas (status: draft) per `gating.mode`.
+1. Write the artefact to the working tree. **Stop there — no git writes.** Never run `git commit`, `git push`, or open a PR/MR: the gate is a human reading the markdown locally, and publishing is their call, not yours.
 2. Summary: routes covered · needs reconstructed · proposed decisions · the three biggest unknowns.
 3. **STOP.** Next: `/cairn-hill` to pressure-test the reconstructed hill, then a validation playback.
+
+## Publishing (only on explicit request)
+
+`gating.mode` in `.cairn.yaml` describes how this repo expects artefacts to be shared. It never authorises you to act. When the human has read the artefact and asks you to publish it:
+
+- `pr` — branch, commit, push, open the PR/MR as a draft.
+- `commit` — commit on the current branch, no push.
+- `none` — nothing to do.
+
+Until they ask, the artefact stays an uncommitted file in the working tree.
 
 ## Guardrails
 

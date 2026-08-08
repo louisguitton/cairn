@@ -30,10 +30,13 @@ type Bindings struct {
 	Glossary  string `yaml:"glossary,omitempty"`  // e.g. glossary.md
 }
 
-// Gating declares how artefact writes are gated in the docs repo.
+// Gating declares how a repo expects artefacts to be shared once a human has
+// reviewed them. It is descriptive, not an authorisation: stage commands write
+// artefacts to the working tree and never commit, push, or open a PR on their
+// own.
 type Gating struct {
-	// Mode: "pr" (branch + PR, merge = playback sign-off), "commit"
-	// (direct commit allowed), or "none" (file write only). Default "none".
+	// Mode: "pr" (share via pull/merge request), "commit" (commit locally),
+	// or "none" (leave the file in the working tree). Default "none".
 	Mode string `yaml:"mode,omitempty"`
 	// Frontmatter is an optional path to a frontmatter template that must
 	// be prepended to every truth artefact (host-repo contract).

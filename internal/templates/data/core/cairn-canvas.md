@@ -86,10 +86,20 @@ Assemble the **Design Canvas**: the single reviewable contract for a feature. It
 
 ## Gate (hard stop)
 
-1. Write (or update in place) the canvas per `gating.mode`. With `pr`, the PR **is** the Spec playback: reviewers are the playback audience, merge is the sign-off. Keep `status: draft` until merged/agreed.
+1. Write the artefact to the working tree. **Stop there — no git writes.** Never run `git commit`, `git push`, or open a PR/MR: the gate is a human reading the markdown locally, and publishing is their call, not yours. Keep `status: draft` until a playback agrees it.
 2. Print the playback summary: canvas path · decision count by driver · MVE in one line · open questions count · what the playback must settle.
 3. **STOP.** Do not emit briefs, stories, or code.
 4. Close with: "You are in **Reflect → Make**. Next moves: `/cairn-handoff` once the Spec playback signs off; `/cairn-hill` if the playback breaks the hill."
+
+## Publishing (only on explicit request)
+
+`gating.mode` in `.cairn.yaml` describes how this repo expects artefacts to be shared. It never authorises you to act. When the human has read the artefact and asks you to publish it:
+
+- `pr` — branch, commit, push, open the PR/MR as a draft.
+- `commit` — commit on the current branch, no push.
+- `none` — nothing to do.
+
+Until they ask, the artefact stays an uncommitted file in the working tree.
 
 ## Norms — the five record-quality criteria (apply to every decision row)
 

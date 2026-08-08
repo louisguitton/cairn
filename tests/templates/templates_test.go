@@ -162,3 +162,29 @@ func TestClaudeSkillBundle(t *testing.T) {
 		}
 	}
 }
+
+// Stage commands must never take outward-facing git actions on their own.
+// A template that tells the agent to commit, push, or open a PR at the gate
+// front-runs the human review that IS the gate.
+func TestTemplatesForbidGitWritesAtTheGate(t *testing.T) {
+	mgr := templates.NewEmbeddedTemplateManager()
+	all, err := mgr.ListAll()
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(all) == 0 {
+		t.Fatal("no templates found")
+	}
+
+	for _, tmpl := range all {
+		if !strings.Contains(tmpl.Content, "**Stop there — no git writes.**") {
+			t.Errorf("%s: gate step must forbid git writes", tmpl.ID)
+		}
+		if !strings.Contains(tmpl.Content, "## Publishing (only on explicit request)") {
+			t.Errorf("%s: missing the publishing-on-request section", tmpl.ID)
+		}
+		if strings.Contains(tmpl.Content, "per `gating.mode`") {
+			t.Errorf("%s: gating.mode is descriptive, not an instruction to act", tmpl.ID)
+		}
+	}
+}

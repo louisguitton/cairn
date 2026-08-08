@@ -95,10 +95,20 @@ Reframe what Observe collected into a **Hill artefact**: problem statement, need
 
 ## Gate (hard stop)
 
-1. Write the artefact per `gating.mode`.
+1. Write the artefact to the working tree. **Stop there — no git writes.** Never run `git commit`, `git push`, or open a PR/MR: the gate is a human reading the markdown locally, and publishing is their call, not yours.
 2. Print the playback summary: artefact path · micro hill (Who/What/Wow in one line) · ladders_to (or the NONE finding) · count of ?-cells and blocking assumptions.
 3. **STOP.** The gate is the **Hill playback**: PO + design + engineering agree on Who/What/Wow before anyone designs a journey. Suggest the 3 sentences to open that playback with.
 4. Close with: "You are in **Reflect**. Next moves: `/cairn-canvas` after the Hill playback; back to `/cairn-intake` if the playback exposes a missing Who/Why."
+
+## Publishing (only on explicit request)
+
+`gating.mode` in `.cairn.yaml` describes how this repo expects artefacts to be shared. It never authorises you to act. When the human has read the artefact and asks you to publish it:
+
+- `pr` — branch, commit, push, open the PR/MR as a draft.
+- `commit` — commit on the current branch, no push.
+- `none` — nothing to do.
+
+Until they ask, the artefact stays an uncommitted file in the working tree.
 
 ## Guardrails
 

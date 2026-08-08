@@ -97,10 +97,20 @@ Turn a raw stakeholder request into an **Intake Brief**: a one-page diagnosis of
 
 ## Gate (hard stop)
 
-1. Write the artefact. If `gating.mode: pr` — branch + commit + open a PR; `commit` — commit directly; `none` — just write.
+1. Write the artefact to the working tree. **Stop there — no git writes.** Never run `git commit`, `git push`, or open a PR/MR: the gate is a human reading the markdown locally, and publishing is their call, not yours.
 2. Print the playback summary: artefact path · input class · gaps missing (count) · top gap · who must answer.
 3. **STOP.** Do not draft a hill, journey, or solution. The stakeholder answering the top gap is the gate.
 4. Close with: "You are in **Observe**. Next moves: `/cairn-hill` once the top gap is answered (or explicitly accepted as risk); `/cairn-reverse` if the request is really an existing prototype."
+
+## Publishing (only on explicit request)
+
+`gating.mode` in `.cairn.yaml` describes how this repo expects artefacts to be shared. It never authorises you to act. When the human has read the artefact and asks you to publish it:
+
+- `pr` — branch, commit, push, open the PR/MR as a draft.
+- `commit` — commit on the current branch, no push.
+- `none` — nothing to do.
+
+Until they ask, the artefact stays an uncommitted file in the working tree.
 
 ## Guardrails
 
