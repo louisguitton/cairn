@@ -37,7 +37,9 @@ Key mechanics:
 
 ```bash
 # macOS
-brew install louisguitton/tools/cairn
+brew tap louisguitton/tools
+brew trust louisguitton/tools     # Homebrew blocks casks from untrusted third-party taps
+brew install --cask cairn
 
 # any platform
 go install github.com/louisguitton/cairn/cmd/cairn@latest
