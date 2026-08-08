@@ -1,0 +1,12 @@
+# semantic-release: analyses conventional commits on main, creates the vX.Y.Z
+# tag, then hands publishing to goreleaser (GitHub release + brew formula).
+# The @semantic-release/github plugin is intentionally absent — goreleaser
+# owns the GitHub release so the brew formula archive URLs resolve.
+branches:
+  - main
+
+plugins:
+  - "@semantic-release/commit-analyzer"
+  - "@semantic-release/release-notes-generator"
+  - - "@semantic-release/exec"
+    - publishCmd: "goreleaser release --clean"
