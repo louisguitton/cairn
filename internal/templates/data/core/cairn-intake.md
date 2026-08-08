@@ -24,6 +24,7 @@ Turn a raw stakeholder request into an **Intake Brief**: a one-page diagnosis of
 ## Steps
 
 1. **Classify the input** (state the class in the brief):
+
    - **Solution-shaped** — a screenshot, mockup, or "we need a dashboard/button/export". Machine language.
    - **Feature-shaped** — "users should be able to do X". Pre-decided action, user still implied.
    - **Outcome-shaped** — "users get stuck at Y". Already user-centred (rare).
@@ -32,11 +33,12 @@ Turn a raw stakeholder request into an **Intake Brief**: a one-page diagnosis of
 
 2. **Deconstruct the artefact.** For every UI element or asserted feature, write the implicit needs statement:
 
-   > _[User] needs a way to ___ so that ___._
+   > _{user} needs a way to {do a task} so that {they benefit}._
 
    **Recast rule (enforce hard)**: if an idea is expressed in machine terms — dashboard, click, log in, export, filter — it is a feature, not a need. Recast it in terms of what the human accomplishes (prioritize, decide, compare, recover, trust). An element you cannot recast is a feature with no user behind it — flag it, don't invent a user.
 
 3. **Inventory the four gaps** — plainly, no editorializing:
+
    - **Who** is the user? (role is not enough — tasks, motivations, obstacles)
    - **What** are they trying to accomplish, in their language?
    - **Why** now — and what does the as-is cost them?

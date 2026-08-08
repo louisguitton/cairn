@@ -25,6 +25,7 @@ Assemble the **Design Canvas**: the single reviewable contract for a feature. It
 1. **Echo the hill.** Copy the micro hill (Who/What/Wow + `ladders_to`) verbatim into the canvas header. Every later section must serve it; anything that doesn't belongs in Out of scope.
 
 2. **To-be journey** — as a mermaid diagram, not prose. Pick the fitting form:
+
    - user journey / flow: `flowchart LR` or `journey`
    - system interaction: `sequenceDiagram`
    - object lifecycle: `stateDiagram-v2`

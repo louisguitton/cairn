@@ -25,6 +25,7 @@ Reframe what Observe collected into a **Hill artefact**: problem statement, need
 1. **Read the macro hills** from the register. Note each hill's id, Who/What/Wow, and owner.
 
 2. **Pick the ladder.** Which macro hill does this work serve?
+
    - Exactly one fits → record `ladders_to: {id}`.
    - None fits → **do not invent one and do not skip**. Record `ladders_to: NONE — {one honest sentence why}` in the artefact and flag it in the gate summary: either this is the wrong work, or a macro-level conversation is due. That finding is a valid, gate-worthy output.
    - Register unbound/empty → draft the micro hill anyway, mark `ladders_to: [TBD — no macro register bound]`, and suggest creating one.
@@ -38,6 +39,7 @@ Reframe what Observe collected into a **Hill artefact**: problem statement, need
 4. **Needs statements** — one per user task, recast rule enforced (no click/view/export verbs; use prioritize/decide/compare/recover/trust). Cluster if >5 and write one über-statement.
 
 5. **Micro hill** — same grammar as macro, smaller blast radius:
+
    - **Who**: specific persona (link the personas file if bound).
    - **What**: the new capability in human terms — no technology named.
    - **Wow**: measurable, ideally a slice of the macro Wow (time, count, %, feeling with a probe).

@@ -27,6 +27,7 @@ If no input given, ask which of the three exists and stop.
 ## Steps
 
 1. **Extract candidate decisions — conservatively.** The bar, per input:
+
    - Transcript/notes: a decision row requires an **explicit commitment** in the source ("we'll go with X", "agreed", "der Kunde will X"). "Let's revisit", "probably", "I think" → open question or assumption, NOT a decision.
    - Diff/prototype: implemented behaviour that contradicts or extends the canvas journey is a **candidate** decision ("built as X") — mark `status: proposed` unless a human confirms it was deliberate.
    - Every extracted row carries a **verbatim provenance quote** (or file:line / route for code) in a Sources footnote. No quote → don't write it. A miss beats noise.
@@ -34,6 +35,7 @@ If no input given, ask which of the three exists and stop.
 2. **Classify each decision row**: driver (`business | ux | feasibility | legal`), owner (who committed it — from the transcript speaker or commit author; unknown → `[TBD]`), date, hill id.
 
 3. **Update the canvas**:
+
    - Append new rows to the Decisions table (next D-id).
    - Supersede, never delete: a reversed decision gets `status: superseded` and the new row links it.
    - Journey: correct diverging nodes; flip cell labels **A → K** (or **? → K/A**) where the input is evidence; flag prototype-vs-canvas divergence that was NOT decided anywhere as an open question — that's drift, surface it.

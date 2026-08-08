@@ -82,7 +82,7 @@ the template bloat in n-ai1st-kit is real, and we prefer the leaner templates fr
 **In `references/ibm-enterprise-design-thinking` (the method content, already written)**
 
 - **A Claude skill** (`SKILL.md` + 9 reference files, ~1,600 lines) implementing a **five-phase pipeline**: (1) Diagnose the input, (2) Deconstruct the artefact, (3) Interrogate the stakeholder, (4) Reframe into EDT artefacts, (5) Translate into engineering shape.
-- **Artefact vocabulary already defined**: Intake Brief (12 sections), Problem Statement, Needs Statements ("[user] needs a way to **\_ so that \_**"), Hill (Who/What/Wow), As-is / To-be Scenario Maps (Phases / Doing / Thinking / Feeling), Assumptions & Questions 2×2 grid, Hypothesis, Minimum Viable Experience, leading/lagging success metrics, architecture implications, explicit out-of-scope.
+- **Artefact vocabulary already defined**: Intake Brief (12 sections), Problem Statement, Needs Statements ("[user] needs a way to {task} so that {benefit}"), Hill (Who/What/Wow), As-is / To-be Scenario Maps (Phases / Doing / Thinking / Feeling), Assumptions & Questions 2×2 grid, Hypothesis, Minimum Viable Experience, leading/lagging success metrics, architecture implications, explicit out-of-scope.
 - **Two enforcement devices worth keeping verbatim**: the "people aren't machines" recast rule (machine language ⇒ it's a feature, not a need), and **K / A / ?** evidence labels (known / assumed / unknown) on every scenario cell, plus mandatory `[TBD — needs sponsor user / interview / data]` instead of fabrication.
 - Note the framing: this skill's protagonist is the **engineer** translating a stakeholder download. The requirement's protagonist set is broader (POs _and_ engineers writing specs).
 

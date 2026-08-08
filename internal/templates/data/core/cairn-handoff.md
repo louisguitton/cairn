@@ -25,6 +25,7 @@ Convert a signed-off Design Canvas into **handoff artefacts**: a prototype brief
 1. **Verify the chain.** The canvas must carry a hill echo and ≥1 decided decision. Missing → stop and route back to `/cairn-canvas`.
 
 2. **Prototype brief** (if wanted) — the experiment commission:
+
    - **Hill id + Wow** (verbatim echo — the prototype exists to test this).
    - **Question this experiment answers** — one sentence. A prototype without a question is scope creep.
    - **Journey slice** — which part of the to-be journey to build; copy the relevant mermaid subgraph.
@@ -33,6 +34,7 @@ Convert a signed-off Design Canvas into **handoff artefacts**: a prototype brief
    - **Report-back** — tell the builder: decisions made while building are recorded via `/cairn-sync`, not lost in the code.
 
 3. **Story set** (if wanted) — one story per journey slice the team will build:
+
    - Grammar (non-negotiable): **As a** {persona} / **I want to** {action} / **so that** {goal}; acceptance criteria as **Given / When / Then** scenarios (happy path + the edge cases that matter).
    - Reference the prototype **by branch + route**, never by screenshot.
    - Each story links its hill id and the canvas decisions it implements (D-ids).
