@@ -39,7 +39,8 @@ Key mechanics:
 - **Decision Records** — one row per decision: driver (business / ux / feasibility / legal), owner, status, options considered, honest consequences.
 - **Repo variables** — `.cairn.yaml` binds a docs repo and a prototype repo, plus artefact paths (`hills`, `personas`, `specs`, `capture`). Works in any setup; unbound types fall back to a `design/` tree.
 - **One folder per piece of work** — `/cairn-intake` proposes a ticket, slug and home folder, you confirm it once, and every later stage writes beside it (`intake.md`, `hill.md`, `canvas.md`, `brief.md`, `stories.md`) instead of re-deriving its own path.
-- **Playback transcripts** are first-class sync input — the weekly sponsor-user hour lands in the canvas, not in someone's notebook.
+- **Playback transcripts** are first-class sync input, so the weekly sponsor-user hour lands in the canvas rather than in someone's notebook.
+- **Written for a review meeting.** Artefacts are shaped for four people reading together for twenty minutes, most of them reading English as a second language: one block per decision rather than a wide table, confidence written as known / assumed / unknown rather than letter codes, no cross-references by bare identifier, open questions triaged by criticality, and plain declarative sentences.
 
 ## Install
 

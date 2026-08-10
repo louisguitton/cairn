@@ -177,7 +177,7 @@ func TestTemplatesForbidGitWritesAtTheGate(t *testing.T) {
 	}
 
 	for _, tmpl := range all {
-		if !strings.Contains(tmpl.Content, "**Stop there — no git writes.**") {
+		if !strings.Contains(tmpl.Content, "**Stop there. No git writes.**") {
 			t.Errorf("%s: gate step must forbid git writes", tmpl.ID)
 		}
 		if !strings.Contains(tmpl.Content, "## Publishing (only on explicit request)") {
@@ -207,6 +207,76 @@ func TestTemplatesShareOneWorkIdentity(t *testing.T) {
 
 		if !establishes && !inherits {
 			t.Errorf("%s: must either establish the work identity or inherit it", tmpl.ID)
+		}
+	}
+}
+
+// The feedback that drove these rules: artefacts full of codes, nine-column
+// decision tables and rhetorical prose did not survive a real review meeting
+// with non-native English speakers. Prompt style is contagious, so the
+// templates must obey the rules they impose.
+func TestTemplatesObeyTheirOwnWritingRules(t *testing.T) {
+	mgr := templates.NewEmbeddedTemplateManager()
+	all, err := mgr.ListAll()
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	for _, tmpl := range all {
+		// An em dash in the instructions teaches the model to use em dashes.
+		if strings.Contains(tmpl.Content, "\u2014") {
+			t.Errorf("%s: contains an em dash, which the writing rules ban", tmpl.ID)
+		}
+		// Confidence must be words, never letter codes.
+		for _, code := range []string{"K/A/?", "(K)", "(A)", "· K", "· A"} {
+			if strings.Contains(tmpl.Content, code) {
+				t.Errorf("%s: uses the %q confidence code instead of a word", tmpl.ID, code)
+			}
+		}
+		if !strings.Contains(tmpl.Content, "## Writing rules") {
+			t.Errorf("%s: missing the writing-rules section", tmpl.ID)
+		}
+		if !strings.Contains(tmpl.Content, "Never refer to anything by an identifier alone") {
+			t.Errorf("%s: missing the ban on identifier-only cross-references", tmpl.ID)
+		}
+		if !strings.Contains(tmpl.Content, "Simplify the sentence, never the claim") {
+			t.Errorf("%s: missing the rule protecting claims from readability edits", tmpl.ID)
+		}
+		if !strings.Contains(tmpl.Content, "Protect the uncomfortable findings") {
+			t.Errorf("%s: missing the guardrail protecting honest findings", tmpl.ID)
+		}
+	}
+}
+
+// Decisions are read aloud one at a time, so they are blocks, not table rows.
+func TestDecisionsUseBlockFormat(t *testing.T) {
+	mgr := templates.NewEmbeddedTemplateManager()
+	for _, id := range []string{"cairn-canvas", "cairn-sync", "cairn-reverse"} {
+		tmpl, err := mgr.GetByName(id)
+		if err != nil {
+			t.Fatalf("%s: %v", id, err)
+		}
+		for _, line := range []string{"**Decided.**", "**Why.**", "**Rejected.**", "**What it costs.**", "**Who owns it.**"} {
+			if !strings.Contains(tmpl.Content, line) {
+				t.Errorf("%s: decision block missing the %s line", id, line)
+			}
+		}
+		if strings.Contains(tmpl.Content, "| ID  | Date") {
+			t.Errorf("%s: still carries the old decision table", id)
+		}
+	}
+}
+
+// Twelve unranked questions is a backlog, not a list.
+func TestOpenQuestionsAreTriaged(t *testing.T) {
+	mgr := templates.NewEmbeddedTemplateManager()
+	tmpl, err := mgr.GetByName("cairn-canvas")
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, want := range []string{"### Critical", "can invalidate the work or block downstream work", "more than about eight open questions"} {
+		if !strings.Contains(tmpl.Content, want) {
+			t.Errorf("cairn-canvas: open questions missing %q", want)
 		}
 	}
 }

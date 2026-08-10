@@ -4,64 +4,69 @@ id: cairn-hill
 category: Core
 stage: reflect
 next: /cairn-canvas (after the Hill playback agrees on Who/What/Wow)
-description: Reframe an intake into a problem statement, needs statements, a micro hill laddering to a macro hill, as-is/to-be scenario maps, and an assumptions 2×2
+description: Reframe an intake into a problem statement, needs statements, a micro hill laddering to a macro hill, as-is/to-be scenario maps, and an assumptions grid
 ---
 
-Reframe what Observe collected into a **Hill artefact**: problem statement, needs statements, one **micro hill** (Who/What/Wow) laddering to a macro hill, paired as-is/to-be scenario maps, and an assumptions grid.
+Reframe what Observe collected into a **Hill artefact**: problem statement, needs statements, one **micro hill** (Who/What/Wow) laddering to a macro hill, paired as-is and to-be scenario maps, and an assumptions grid.
 
-**Loop stage: Reflect.** You are converging on intent, not designing screens or flows.
+**Loop stage: Reflect.** You are converging on intent. You are not designing screens or flows.
 
-**Input**: an Intake Brief (`@file`), or a direct description if the request is small enough to skip intake (say so in the artefact: `entered at: hill`).
+**Input**: an Intake Brief (`@file`), or a direct description if the request is small enough to skip intake. If you skip intake, say so in the artefact: `entered at: hill`.
 
 ## Config
 
-1. Read `.cairn.yaml`, then take the **work identity from the input artefact's `Work` header** — the home folder, ticket and slug. Reuse them exactly; never re-derive a slug or invent a second folder for the same work.
-   - Input has no `Work` header (entered mid-pipeline) → propose ticket, slug and home the way `/cairn-intake` does, and **ask the user to confirm before writing**.
+1. Read `.cairn.yaml`, then take the **work identity from the input artefact's `Work` header**: the home folder, ticket and slug. Reuse them exactly. Never re-derive a slug or invent a second folder for the same work.
+   - Input has no `Work` header (you entered mid-pipeline)? Propose ticket, slug and home the way `/cairn-intake` does, then **ask the user to confirm before writing**.
 2. Write to `<home>/hill.md`.
-3. `bindings.hills` → the **macro hill register**. Read it; NEVER write it. Unbound → no macro hills exist yet; see step 2 of Steps.
-4. Prepend `gating.frontmatter` template if declared.
+3. `bindings.hills` is the **macro hill register**. Read it. Never write it. If unbound, no macro hills exist yet. See step 2 below.
+4. Prepend the `gating.frontmatter` template if one is declared.
 
 ## Steps
 
-1. **Read the macro hills** from the register. Note each hill's id, Who/What/Wow, and owner.
+1. **Read the macro hills** from the register. Note each hill's id, its Who/What/Wow, and its owner.
 
 2. **Pick the ladder.** Which macro hill does this work serve?
 
-   - Exactly one fits → record `ladders_to: {id}`.
-   - None fits → **do not invent one and do not skip**. Record `ladders_to: NONE — {one honest sentence why}` in the artefact and flag it in the gate summary: either this is the wrong work, or a macro-level conversation is due. That finding is a valid, gate-worthy output.
-   - Register unbound/empty → draft the micro hill anyway, mark `ladders_to: [TBD — no macro register bound]`, and suggest creating one.
+   - Exactly one fits. Record `ladders_to: {id}`.
+   - None fits. **Do not invent one and do not skip.** Record `ladders_to: NONE` with one honest sentence explaining why, and flag it in the gate summary. Either this is the wrong work, or a macro-level conversation is due. That finding is a valid, gate-worthy output.
+   - The register is unbound or empty. Draft the micro hill anyway, mark `ladders_to: [TBD, no macro register bound]`, and suggest creating one.
 
-3. **Problem statement** — one sentence, user-centred, anchored in the as-is, no solution:
+3. **Problem statement.** One sentence, user-centred, anchored in the as-is, with no solution in it:
 
    > _{Specific user} struggles to {do something} because {as-is reason}, which costs them {concrete cost}._
 
-   Cost unknown → `[TBD — needs interview / data]`, never invented.
+   If the cost is unknown, write `[TBD, needs interview or data]`. Never invent it.
 
-4. **Needs statements** — one per user task, recast rule enforced (no click/view/export verbs; use prioritize/decide/compare/recover/trust). Cluster if >5 and write one über-statement.
+4. **Needs statements.** One per user task. Enforce the recast rule: no click, view or export verbs. Use task verbs such as prioritise, decide, compare, recover, trust. If you have more than five, cluster them and write one statement that covers the cluster.
 
-5. **Micro hill** — same grammar as macro, smaller blast radius:
+5. **Micro hill.** Same grammar as a macro hill, smaller blast radius:
 
-   - **Who**: specific persona (link the personas file if bound).
-   - **What**: the new capability in human terms — no technology named.
-   - **Wow**: measurable, ideally a slice of the macro Wow (time, count, %, feeling with a probe).
-   - **Timeframe**: day | week | sprint.
+   - **Who**: a specific persona. Link the personas file if it is bound.
+   - **What**: the new capability in human terms. Name no technology.
+   - **Wow**: measurable, ideally a slice of the macro Wow (a time, a count, a percentage, or a feeling with a probe attached).
+   - **Timeframe**: day, week or sprint.
 
-6. **As-is / To-be scenario maps** — 4 rows (Phases / Doing / Thinking / Feeling), 4–7 phases, **every cell labelled K, A, or ?**. The negative cells in the as-is Feeling row are where the Wow must land; say which.
+6. **As-is and to-be scenario maps.** Four rows (Phases, Doing, Thinking, Feeling), four to seven phases. Mark **every cell** as known, assumed or unknown, spelled out in words. The negative cells in the as-is Feeling row are where the Wow has to land. Say which ones.
 
-7. **Assumptions 2×2** — every assumption placed on certainty × risk. The uncertain/high-risk quadrant blocks the build; each entry there gets a validation plan (sponsor-user session, data pull, spike).
+   Leave a cell empty and mark it unknown rather than inventing a plausible feeling. An empty row is a finding: nobody has observed a user yet.
+
+7. **Assumptions grid.** Place every assumption on certainty against risk. **Key each assumption by a short name**, two or three words, so a reviewer can say it out loud. Do not number them. The uncertain and high-risk group blocks the build, and each entry there needs a validation plan: a sponsor-user session, a data pull, or a spike.
 
 ## Artefact grammar (Hill artefact)
 
 ```markdown
-# Hill — {title}
+# Hill: {title}
 
-|            |                                              |
-| ---------- | -------------------------------------------- |
-| Work       | {ticket} · `{home folder}` · slug `{slug}`   |
-| Ladders to | {macro id + one-line quote of its What}      |
-| Timeframe  | {day/week/sprint}                            |
-| Entered at | {intake → hill / hill (skipped intake, why)} |
-| Source     | {intake brief link / request quote}          |
+|            |                                                      |
+| ---------- | ---------------------------------------------------- |
+| Work       | {ticket} · `{home folder}` · slug `{slug}`           |
+| Ladders to | {macro id, plus a one-line quote of its What}        |
+| Timeframe  | {day, week or sprint}                                |
+| Entered at | {intake then hill, or hill directly with the reason} |
+| Source     | {intake brief path, or the request quoted}           |
+
+Confidence in this document is written as **known** (there is evidence),
+**assumed** (a reasonable guess) or **unknown** (nobody knows yet).
 
 ## Problem statement
 
@@ -69,54 +74,72 @@ Reframe what Observe collected into a **Hill artefact**: problem statement, need
 
 ## Needs statements
 
-- N1: {user} needs a way to … so that … (K/A/?)
+- {user} needs a way to … so that … ({known, assumed or unknown})
 
 ## Micro hill
 
 - **Who:** {persona}
-- **What:** {capability, human terms}
+- **What:** {capability, in human terms}
 - **Wow:** {measurable differentiator}
 
 ## As-is
 
-|          | {phase 1} | {phase 2} | …   |
-| -------- | --------- | --------- | --- |
-| Doing    | (K) …     | (A) …     |     |
-| Thinking | (A) …     | (?) …     |     |
-| Feeling  | (A) …     | (?) …     |     |
+|          | {phase 1}     | {phase 2}     |
+| -------- | ------------- | ------------- |
+| Doing    | {…} (known)   | {…} (assumed) |
+| Thinking | {…} (assumed) | {…} (unknown) |
+| Feeling  | {…} (assumed) | (unknown)     |
 
 ## To-be
 
-{same 4-row shape; mark the cells the Wow changes}
+{the same four-row shape. Mark the cells the Wow changes.}
 
-## Assumptions (certainty × risk)
+## Assumptions
 
-| #   | Assumption | Certainty | Risk | Validation plan (if uncertain+high) |
-| --- | ---------- | --------- | ---- | ----------------------------------- |
+| Assumption          | What it claims | Certainty | Risk | Validation plan                            |
+| ------------------- | -------------- | --------- | ---- | ------------------------------------------ |
+| **{two-word name}** | {one sentence} | assumed   | high | {sponsor-user session, data pull or spike} |
+
+Blocking group (uncertain and high risk): {name them in words, not codes}.
 ```
 
-The `Work` row is the identity every later stage inherits — same ticket, same folder, same slug. Never restate it differently.
+The `Work` row is the identity every later stage inherits: same ticket, same folder, same slug. Never restate it differently.
+
+## Writing rules
+
+Your reader is a product owner or an engineer whose first language is probably German or French, reading English, in a meeting, with three other people and twenty minutes.
+
+- One idea per sentence. Prefer a full stop to a semicolon, and a sentence to a subordinate clause.
+- State facts. Do not argue for them. No rhetorical flourishes, no dramatic framing, no sentence whose job is to sound conclusive.
+- **Never use an em dash.** Use a full stop, a comma, a colon, or brackets.
+- Never use `+` or `-` as connectives in prose. Write the cost as a sentence.
+- **Never refer to anything by an identifier alone**, in this document or in a source. Write what it says. Ticket and commit ids are addresses rather than references: keep them, with a description attached, as in "the price visibility bug, BUG-2578".
+- Write confidence as words: known, assumed, unknown. Never as K, A or ?. Include the two-line legend shown above.
+- Write figures in full, in the reader's convention: 50.000 EUR, not €50k.
+- Prefer the plain word to the sophisticated one when they mean the same thing.
+- **Simplify the sentence, never the claim.** A hedge, a confidence marker, or a note that something is unmeasured is content. If a situation is genuinely uncertain and hard to write plainly, write two plain sentences. Never delete the uncertainty.
 
 ## Gate (hard stop)
 
-1. Write the artefact to the working tree. **Stop there — no git writes.** Never run `git commit`, `git push`, or open a PR/MR: the gate is a human reading the markdown locally, and publishing is their call, not yours.
-2. Print the playback summary: artefact path · micro hill (Who/What/Wow in one line) · ladders_to (or the NONE finding) · count of ?-cells and blocking assumptions.
-3. **STOP.** The gate is the **Hill playback**: PO + design + engineering agree on Who/What/Wow before anyone designs a journey. Suggest the 3 sentences to open that playback with.
-4. Close with: "You are in **Reflect**. Next moves: `/cairn-canvas` after the Hill playback; back to `/cairn-intake` if the playback exposes a missing Who/Why."
+1. Write the artefact to the working tree. **Stop there. No git writes.** Never run `git commit`, `git push`, or open a PR or MR. The gate is a human reading the markdown locally, and publishing is their call, not yours.
+2. Print the playback summary: artefact path, the micro hill in one line, what it ladders to (or the NONE finding), how many cells are unknown, and which assumptions block the build.
+3. **STOP.** The gate is the **Hill playback**: product owner, design and engineering agree on Who/What/Wow before anyone designs a journey. Offer the three sentences to open that playback with.
+4. Close with: "You are in **Reflect**. Next moves: `/cairn-canvas` after the Hill playback. Back to `/cairn-intake` if the playback exposes a missing Who or Why."
 
 ## Publishing (only on explicit request)
 
 `gating.mode` in `.cairn.yaml` describes how this repo expects artefacts to be shared. It never authorises you to act. When the human has read the artefact and asks you to publish it:
 
-- `pr` — branch, commit, push, open the PR/MR as a draft.
-- `commit` — commit on the current branch, no push.
-- `none` — nothing to do.
+- `pr`: branch, commit, push, open the PR or MR as a draft.
+- `commit`: commit on the current branch, no push.
+- `none`: nothing to do.
 
 Until they ask, the artefact stays an uncommitted file in the working tree.
 
 ## Guardrails
 
-- **Never write the macro hill register.** Read-only, always. Promotion of a micro hill to macro is a human act outside this command.
-- No solution or screen language in Who/What/Wow.
-- Every scenario cell carries K/A/?; unknown cost/metric is `[TBD — needs X]`.
-- Structure-first; prose only in the problem statement and rationale lines.
+- **Never write the macro hill register.** Read-only, always. Promoting a micro hill to macro is a human act outside this command.
+- No solution or screen language in Who, What or Wow.
+- Every scenario cell says known, assumed or unknown. An unknown cost or metric is `[TBD, needs X]`.
+- **Protect the uncomfortable findings.** If the Wow describes a mechanism instead of an outcome, say so rather than quietly improving it. If a stated user need is really a policy requirement served through the user's screen, record it that way. If two sources contradict each other, surface the contradiction instead of picking the convenient one. These findings are the point of the artefact.
+- Structure first. Prose belongs in the problem statement and the rationale lines.

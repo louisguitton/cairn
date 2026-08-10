@@ -4,87 +4,121 @@ id: cairn-sync
 category: Core
 stage: loop
 next: /cairn-canvas (if the sync demands re-design), /cairn-handoff (next slice), /cairn-hill (if the hill itself broke)
-description: Close the Loop — harvest a git diff/prototype, a playback-meeting transcript, or loose notes into decision records and canvas updates
+description: Close the Loop by harvesting a git diff or prototype, a playback-meeting transcript, or loose notes into decision records and canvas updates
 ---
 
-Close the EDT Loop: read what reality produced — built prototype, playback meeting, hallway decision — and sync it **back into the Design Canvas** as decision records and journey corrections. This is the command that keeps the canvas from becoming a stale oracle. It must stay the cheapest command to run.
+Close the EDT Loop. Read what reality produced, whether that is a built prototype, a playback meeting or a hallway decision, and sync it **back into the Design Canvas** as decision records and journey corrections. This is the command that stops the canvas becoming a stale oracle, so it has to stay the cheapest command to run.
 
-**Loop stage: Make → Observe.** Reality is the new observation.
+**Loop stage: Make, returning to Observe.** Reality is the new observation.
 
-**Input** (one or more, all first-class):
+**Input**, one or more, all first-class:
 
-- **(a) Diff / prototype**: a git range, branch, or prototype directory in the proto repo.
-- **(b) Playback transcript**: notes or auto-transcript of a session with stakeholders, the client, or sponsor users (`@file` or pasted).
-- **(c) Loose notes**: Slack thread, hallway decision, grilling-session notes.
+- **A diff or prototype**: a git range, a branch, or a prototype directory in the proto repo.
+- **A playback transcript**: notes or an auto-transcript of a session with stakeholders, the client, or sponsor users (`@file` or pasted).
+- **Loose notes**: a Slack thread, a hallway decision, notes from a grilling session.
 
-If no input given, ask which of the three exists and stop.
+If no input is given, ask which of the three exists and stop.
 
 ## Config
 
-1. Read `.cairn.yaml`, then locate the work: the canvas at `<home>/canvas.md`, taken from the input artefact's `Work` header. Given only raw input (a transcript, a diff), list the candidate work folders under `bindings.specs` and **ask which one this belongs to** — never guess.
-2. `proto_repo.path` → where to run diff inspection for input (a).
-3. `bindings.capture` → file a dated copy of the raw transcript or notes there, and cite that path in Sources.
+1. Read `.cairn.yaml`, then locate the work: the canvas at `<home>/canvas.md`, taken from the input artefact's `Work` header. Given only raw input such as a transcript or a diff, list the candidate work folders under `bindings.specs` and **ask which one this belongs to**. Never guess.
+2. `proto_repo.path` is where you inspect a diff.
+3. `bindings.capture` is where you file a dated copy of the raw transcript or notes. Cite that path in Sources.
 
 ## Steps
 
-1. **Extract candidate decisions — conservatively.** The bar, per input:
+1. **Extract candidate decisions conservatively.** The bar, per input:
 
-   - Transcript/notes: a decision row requires an **explicit commitment** in the source ("we'll go with X", "agreed", "der Kunde will X"). "Let's revisit", "probably", "I think" → open question or assumption, NOT a decision.
-   - Diff/prototype: implemented behaviour that contradicts or extends the canvas journey is a **candidate** decision ("built as X") — mark `status: proposed` unless a human confirms it was deliberate.
-   - Every extracted row carries a **verbatim provenance quote** (or file:line / route for code) in a Sources footnote. No quote → don't write it. A miss beats noise.
+   - Transcript or notes: a decision needs an **explicit commitment** in the source, such as "we'll go with X", "agreed", or "der Kunde will X". Phrases like "let's revisit", "probably" and "I think" become an open question or an assumption. They are not decisions.
+   - Diff or prototype: implemented behaviour that contradicts or extends the canvas journey is a **candidate** decision. Record it as built, with status `proposed`, unless a human confirms it was deliberate.
+   - Every extracted decision carries a **verbatim provenance quote**, or a file and line, or a route, in the Sources line. No quote means you do not write it. A miss beats noise.
 
-2. **Classify each decision row**: driver (`business | ux | feasibility | legal`), owner (who committed it — from the transcript speaker or commit author; unknown → `[TBD]`), date, hill id.
+2. **Classify each decision**: driver (business, ux, feasibility or legal), owner (the person who committed to it, taken from the transcript speaker or the commit author, `[TBD]` if unknown), the date, and the hill it serves.
 
 3. **Update the canvas**:
 
-   - Append new rows to the Decisions table (next D-id).
-   - Supersede, never delete: a reversed decision gets `status: superseded` and the new row links it.
-   - Journey: correct diverging nodes; flip cell labels **A → K** (or **? → K/A**) where the input is evidence; flag prototype-vs-canvas divergence that was NOT decided anywhere as an open question — that's drift, surface it.
-   - Answered assumptions move out of the 2×2; new ones move in.
-   - Architectural decisions get `→ promote to ADR` flags targeting `bindings.decisions`.
+   - Add a new decision **block** for each one, in the block format the canvas uses. Never a table row. Give it the next number and a short title.
+   - Supersede, never delete. A reversed decision keeps its block with status `superseded`, and the new block says which decision replaced it, by title as well as number.
+   - Journey: correct the diverging nodes. Change `(assumed)` to `(known)` where the input is evidence. If the prototype diverges from the canvas and no decision anywhere covers it, that is drift, and it becomes an open question.
+   - Assumptions that got answered move out of the grid. New ones move in, keyed by short name.
+   - A decision that crosses systems or is hard to reverse gets `Promote to ADR` in its `Who owns it.` line, targeting `bindings.decisions`.
 
-4. **Route raw input**: if `bindings.capture` is bound and the transcript/notes aren't stored yet, save them there first (dated, append-only) and cite that path in Sources.
+4. **Route the raw input.** If `bindings.capture` is bound and the transcript or notes are not stored yet, save them there first, dated, and cite that path in Sources.
 
-## Output shape (canvas edit, not a new artefact)
+## Output shape (an edit to the canvas, not a new artefact)
 
-The canvas diff should show only:
+The canvas diff should show only this:
 
 ```markdown
 ## Decisions
 
-| D7 | {date} | {decision} | ux | {owner} | decided | {options, brief} | {+/−} |
-| D8 | {date} | {built-as finding} | feasibility | [TBD] | proposed | … | … |
+### 7. {short title}
 
-## To-be journey ← corrected nodes, A→K flips
+**Decided.** {what was decided}
+**Why.** {the reason it won}
+**Rejected.** {the option, and why it lost}
+**What it costs.** {the honest downside}
+**Who owns it.** {name}. Driver: {business, ux, feasibility or legal}. Status: decided.
 
-## Assumptions ← answered rows out, new rows in
+### 8. {short title of a built-as finding}
 
-## Open questions ← undecided divergence lands here
+**Decided.** Built as {behaviour}, found in the prototype rather than agreed in a playback.
+**Why.** {the reason given in the source, or "no reason recorded"}
+**Rejected.** {what the canvas said instead, and why it lost, or "nothing, this contradicts the canvas"}
+**What it costs.** {the honest downside}
+**Who owns it.** [TBD]. Driver: feasibility. Status: proposed.
 
-Sources: {capture path / transcript quote refs / commit range}
+## To-be journey
+
+{corrected nodes, and assumed changed to known where there is now evidence}
+
+## Assumptions
+
+{answered ones out, new ones in, keyed by short name}
+
+## Open questions
+
+{undecided divergence lands here, under a criticality heading}
+
+Sources: {capture path, the quotes you relied on, the commit range}
 ```
 
-## Gate
+## Writing rules
 
-1. Write the artefact to the working tree. **Stop there — no git writes.** Never run `git commit`, `git push`, or open a PR/MR: the gate is a human reading the markdown locally, and publishing is their call, not yours.
-2. Print the playback summary: decisions extracted (by driver) · proposed vs decided · A→K flips · drift findings · promotion flags.
+Your reader is a product owner or an engineer whose first language is probably German or French, reading English, in a meeting, with three other people and twenty minutes.
+
+- One idea per sentence. Prefer a full stop to a semicolon, and a sentence to a subordinate clause.
+- State facts. Do not argue for them. No rhetorical flourishes, no dramatic framing, no sentence whose job is to sound conclusive.
+- **Never use an em dash.** Use a full stop, a comma, a colon, or brackets.
+- Never use `+` or `-` as connectives in prose.
+- **Never refer to anything by an identifier alone**, in this document or in a source. Write what it says. Ticket and commit ids are addresses rather than references: keep them, with a description attached, as in "the price visibility bug, BUG-2578".
+- Write confidence as words: known, assumed, unknown. Never as K, A or ?.
+- Write figures in full, in the reader's convention: 50.000 EUR, not €50k.
+- Prefer the plain word to the sophisticated one when they mean the same thing.
+- **Simplify the sentence, never the claim.** A hedge, a confidence marker, or a note that something is unmeasured is content. If a situation is genuinely uncertain and hard to write plainly, write two plain sentences. Never delete the uncertainty.
+
+## Gate (hard stop)
+
+1. Write the canvas update to the working tree. **Stop there. No git writes.** Never run `git commit`, `git push`, or open a PR or MR. The gate is a human reading the markdown locally, and publishing is their call, not yours.
+2. Print the playback summary: how many decisions you extracted and under which drivers, how many are proposed rather than decided, which assumptions became known, what drifted, and what you flagged for promotion to an ADR.
 3. **STOP.**
-4. Close with: "Loop closed: **Make → Observe**. Next moves: `/cairn-handoff` for the next slice; `/cairn-canvas` if drift demands re-design; `/cairn-hill` if the Wow itself was refuted."
+4. Close with: "Loop closed: **Make, returning to Observe**. Next moves: `/cairn-handoff` for the next slice. `/cairn-canvas` if drift demands re-design. `/cairn-hill` if the Wow itself was refuted."
 
 ## Publishing (only on explicit request)
 
 `gating.mode` in `.cairn.yaml` describes how this repo expects artefacts to be shared. It never authorises you to act. When the human has read the artefact and asks you to publish it:
 
-- `pr` — branch, commit, push, open the PR/MR as a draft.
-- `commit` — commit on the current branch, no push.
-- `none` — nothing to do.
+- `pr`: branch, commit, push, open the PR or MR as a draft.
+- `commit`: commit on the current branch, no push.
+- `none`: nothing to do.
 
 Until they ask, the artefact stays an uncommitted file in the working tree.
 
 ## Guardrails
 
-- **Conservative extraction is the law**: explicit commitment + verbatim quote, or it's an assumption/question.
-- Never edit the macro hill register, `bindings.capture` existing files, or anything outside the resolved canvas + capture paths.
-- Never delete decision rows — supersede.
-- Garbled auto-transcripts (mixed languages, broken names): quote as-is, mark owner `[TBD]`, don't guess speakers.
-- Multiple canvases matched → ask, don't pick.
+- **Conservative extraction is the law.** An explicit commitment plus a verbatim quote, or it stays an assumption or a question.
+- Never edit the macro hill register, never edit existing files under `bindings.capture`, and never touch anything outside the resolved canvas and capture paths.
+- Never delete a decision. Supersede it.
+- Garbled auto-transcripts, with mixed languages and broken names, get quoted as they are. Mark the owner `[TBD]`. Do not guess who spoke.
+- **Protect the uncomfortable findings.** Drift with no decision behind it, a claim the prototype never measured, a contradiction between two sources: all of it stays visible. This command exists to surface them.
+- If several canvases match, ask. Do not pick.
