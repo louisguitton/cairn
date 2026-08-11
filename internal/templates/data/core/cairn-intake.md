@@ -18,7 +18,8 @@ Turn a raw stakeholder request into an **Intake Brief**: a one-page diagnosis of
 1. Read `.cairn.yaml` from the repo root, searching upward.
 2. **Establish the work identity before writing anything.** This command names the work. Every later stage inherits that name and must never re-derive it.
    - **Ticket**: take the key from the request, for example `APP-4947`. If none is mentioned, ask for one, and only fall back to `XXX` if the user says there is no ticket.
-   - **Slug**: three to six kebab-case words naming the outcome, not the mechanism.
+   - **Title**: write it first, following the title rule in Writing rules below. Everything else is derived from it.
+   - **Slug**: three to six kebab-case words lifted from the title. Because it comes from the title it names the outcome, not the mechanism. `agentic-catalogue-in-chat` and `portfolio-upload-and-facets` are the failure to avoid: both name a mechanism in team jargon.
    - **Home**: `{specs}/<existing stream>/<existing epic folder>/<slug>/` when `bindings.specs` is set. List the real subfolders and place the work under the matching one. If unbound, use `design/<slug>/`.
    - Show the full proposed path plus the ticket and slug, then **ask the user to confirm or edit it**. Do not write until they answer.
 3. Write the brief to `<home>/1-intake.md`. All stage artefacts for this work live in that one folder, **numbered in the order they should be reviewed**: `1-intake.md`, `2-hill.md`, `3-canvas.md`, `4-brief.md`, `5-stories.md`. A reviewer reads the folder top to bottom and gets the argument in the right order.
@@ -112,6 +113,11 @@ The `Work` row is the identity every later stage inherits: same ticket, same fol
 
 Your reader is a product owner or an engineer whose first language is probably German or French, reading English, in a meeting, with three other people and twenty minutes.
 
+- **The title is one line of plain words that stands on its own.** Someone who has never opened this folder should understand what the work is from the title alone. State the outcome for the user, not the mechanism that delivers it. No jargon, no feature or product codes, no internal labels such as "Hill 2", no words that only mean something inside your team. Write it lowercase after the colon, as a phrase.
+  - Good: `answer a described need with products the buyer can actually order`
+  - Good: `one list of products and services, and any file can fill it`
+  - Weak: `agentic catalogue in chat` (jargon, and it names the mechanism)
+  - Weak: `portfolio upload and facets` ("facets" is an implementation word)
 - One idea per sentence. Prefer a full stop to a semicolon, and a sentence to a subordinate clause.
 - State facts. Do not argue for them. No rhetorical flourishes, no dramatic framing, no sentence whose job is to sound conclusive.
 - **Never use an em dash.** Use a full stop, a comma, a colon, or brackets.

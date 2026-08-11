@@ -109,6 +109,11 @@ The `Work` row is the identity every later stage inherits: same ticket, same fol
 
 Your reader is a product owner or an engineer whose first language is probably German or French, reading English, in a meeting, with three other people and twenty minutes.
 
+- **The title is one line of plain words that stands on its own.** Someone who has never opened this folder should understand what the work is from the title alone. State the outcome for the user, not the mechanism that delivers it. No jargon, no feature or product codes, no internal labels such as "Hill 2", no words that only mean something inside your team. Write it lowercase after the colon, as a phrase.
+  - Good: `answer a described need with products the buyer can actually order`
+  - Good: `one list of products and services, and any file can fill it`
+  - Weak: `agentic catalogue in chat` (jargon, and it names the mechanism)
+  - Weak: `portfolio upload and facets` ("facets" is an implementation word)
 - One idea per sentence. Prefer a full stop to a semicolon, and a sentence to a subordinate clause.
 - State facts. Do not argue for them. No rhetorical flourishes, no dramatic framing, no sentence whose job is to sound conclusive.
 - **Never use an em dash.** Use a full stop, a comma, a colon, or brackets.

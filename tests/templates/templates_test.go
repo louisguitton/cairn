@@ -313,3 +313,33 @@ func TestArtefactFilenamesAreNumberedByReviewOrder(t *testing.T) {
 		}
 	}
 }
+
+// A title has to stand on its own: the folder listing and any later reference
+// show the title, not the folder path. Emergent good titles are not enough,
+// because nothing stops them regressing.
+func TestTitlesMustBeSelfContainedPlainWords(t *testing.T) {
+	mgr := templates.NewEmbeddedTemplateManager()
+
+	// Every template that writes an artefact with a `# X: {title}` heading.
+	for _, id := range []string{"cairn-intake", "cairn-hill", "cairn-canvas", "cairn-handoff", "cairn-reverse"} {
+		tmpl, err := mgr.GetByName(id)
+		if err != nil {
+			t.Fatalf("%s: %v", id, err)
+		}
+		if !strings.Contains(tmpl.Content, "The title is one line of plain words that stands on its own") {
+			t.Errorf("%s: missing the self-contained title rule", id)
+		}
+		if !strings.Contains(tmpl.Content, "State the outcome for the user, not the mechanism") {
+			t.Errorf("%s: title rule must demand the outcome over the mechanism", id)
+		}
+	}
+
+	// The slug is derived from the title, so the two cannot disagree.
+	intake, err := mgr.GetByName("cairn-intake")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !strings.Contains(intake.Content, "kebab-case words lifted from the title") {
+		t.Error("cairn-intake: the slug must be derived from the title")
+	}
+}
