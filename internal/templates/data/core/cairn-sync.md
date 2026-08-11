@@ -21,7 +21,7 @@ If no input is given, ask which of the three exists and stop.
 
 ## Config
 
-1. Read `.cairn.yaml`, then locate the work: the canvas at `<home>/canvas.md`, taken from the input artefact's `Work` header. Given only raw input such as a transcript or a diff, list the candidate work folders under `bindings.specs` and **ask which one this belongs to**. Never guess.
+1. Read `.cairn.yaml`, then locate the work: the canvas at `<home>/3-canvas.md`, taken from the input artefact's `Work` header. Given only raw input such as a transcript or a diff, list the candidate work folders under `bindings.specs` and **ask which one this belongs to**. Never guess.
 2. `proto_repo.path` is where you inspect a diff.
 3. `bindings.capture` is where you file a dated copy of the raw transcript or notes. Cite that path in Sources.
 

@@ -17,7 +17,7 @@ Convert a signed-off Design Canvas into **handoff artefacts**: a prototype brief
 
 1. Read `.cairn.yaml`, then take the **work identity from the input artefact's `Work` header**: the home folder, ticket and slug. Reuse them exactly. Never re-derive a slug or invent a second folder for the same work.
    - Input has no `Work` header (you entered mid-pipeline)? Propose ticket, slug and home the way `/cairn-intake` does, then **ask the user to confirm before writing**.
-2. Write to `<home>/brief.md` and `<home>/stories.md`, next to the canvas they derive from.
+2. Write to `<home>/4-brief.md` and `<home>/5-stories.md`, next to the canvas they derive from. The numbers are the review order, continuing from `3-canvas.md`.
 3. `proto_repo.path` is the target the brief addresses, using its branch and route scheme.
 4. Prepend `gating.frontmatter` if declared.
 

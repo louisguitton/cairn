@@ -15,7 +15,7 @@ Read an **existing prototype**, where the request arrived as an implementation r
 
 ## Config
 
-Read `.cairn.yaml`. Establish the work identity the way `/cairn-intake` does: propose a ticket, a slug and a home folder under `bindings.specs`, then **ask the user to confirm before writing**. Artefacts go to `<home>/hill.md` and `<home>/canvas.md`. Read macro hills from `bindings.hills`, which is read-only, to guess what this work ladders to.
+Read `.cairn.yaml`. Establish the work identity the way `/cairn-intake` does: propose a ticket, a slug and a home folder under `bindings.specs`, then **ask the user to confirm before writing**. Artefacts go to `<home>/2-hill.md` and `<home>/3-canvas.md`. The numbers are the review order. There is deliberately no `1-intake.md`: the missing number records that no stakeholder intake happened, because the prototype was the request. Read macro hills from `bindings.hills`, which is read-only, to guess what this work ladders to.
 
 ## Steps
 

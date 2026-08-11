@@ -17,7 +17,7 @@ Reframe what Observe collected into a **Hill artefact**: problem statement, need
 
 1. Read `.cairn.yaml`, then take the **work identity from the input artefact's `Work` header**: the home folder, ticket and slug. Reuse them exactly. Never re-derive a slug or invent a second folder for the same work.
    - Input has no `Work` header (you entered mid-pipeline)? Propose ticket, slug and home the way `/cairn-intake` does, then **ask the user to confirm before writing**.
-2. Write to `<home>/hill.md`.
+2. Write to `<home>/2-hill.md`. The number is the review order: the hill is read before the canvas, always.
 3. `bindings.hills` is the **macro hill register**. Read it. Never write it. If unbound, no macro hills exist yet. See step 2 below.
 4. Prepend the `gating.frontmatter` template if one is declared.
 

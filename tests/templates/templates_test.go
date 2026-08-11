@@ -280,3 +280,36 @@ func TestOpenQuestionsAreTriaged(t *testing.T) {
 		}
 	}
 }
+
+// The folder listing is the review agenda, so artefacts are numbered in the
+// order they should be read. The hill is always reviewed before the canvas.
+func TestArtefactFilenamesAreNumberedByReviewOrder(t *testing.T) {
+	mgr := templates.NewEmbeddedTemplateManager()
+
+	writes := map[string][]string{
+		"cairn-intake":  {"`<home>/1-intake.md`"},
+		"cairn-hill":    {"`<home>/2-hill.md`"},
+		"cairn-canvas":  {"`<home>/3-canvas.md`"},
+		"cairn-handoff": {"`<home>/4-brief.md`", "`<home>/5-stories.md`"},
+		"cairn-sync":    {"`<home>/3-canvas.md`"},
+		"cairn-reverse": {"`<home>/2-hill.md`", "`<home>/3-canvas.md`"},
+	}
+
+	for id, paths := range writes {
+		tmpl, err := mgr.GetByName(id)
+		if err != nil {
+			t.Fatalf("%s: %v", id, err)
+		}
+		for _, want := range paths {
+			if !strings.Contains(tmpl.Content, want) {
+				t.Errorf("%s: expected to write %s", id, want)
+			}
+		}
+		// An unnumbered path would sort wrong in the folder listing.
+		for _, bare := range []string{"`<home>/intake.md`", "`<home>/hill.md`", "`<home>/canvas.md`", "`<home>/brief.md`", "`<home>/stories.md`"} {
+			if strings.Contains(tmpl.Content, bare) {
+				t.Errorf("%s: still writes the unnumbered path %s", id, bare)
+			}
+		}
+	}
+}

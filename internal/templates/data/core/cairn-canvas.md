@@ -17,7 +17,7 @@ Assemble the **Design Canvas**: the single reviewable contract for a feature. It
 
 1. Read `.cairn.yaml`, then take the **work identity from the input artefact's `Work` header**: the home folder, ticket and slug. Reuse them exactly. Never re-derive a slug or invent a second folder for the same work.
    - Input has no `Work` header (you entered mid-pipeline)? Propose ticket, slug and home the way `/cairn-intake` does, then **ask the user to confirm before writing**.
-2. Write to `<home>/canvas.md`. One canvas per work, **updated in place** on re-runs. Never fork a second canvas.
+2. Write to `<home>/3-canvas.md`. The number is the review order: the canvas is read after the hill it serves. One canvas per work, **updated in place** on re-runs. Never fork a second canvas.
 3. Prepend `gating.frontmatter` if declared. Read `bindings.glossary` for domain terms if it is bound.
 
 ## Steps

@@ -21,7 +21,7 @@ Turn a raw stakeholder request into an **Intake Brief**: a one-page diagnosis of
    - **Slug**: three to six kebab-case words naming the outcome, not the mechanism.
    - **Home**: `{specs}/<existing stream>/<existing epic folder>/<slug>/` when `bindings.specs` is set. List the real subfolders and place the work under the matching one. If unbound, use `design/<slug>/`.
    - Show the full proposed path plus the ticket and slug, then **ask the user to confirm or edit it**. Do not write until they answer.
-3. Write the brief to `<home>/intake.md`. All stage artefacts for this work live in that one folder.
+3. Write the brief to `<home>/1-intake.md`. All stage artefacts for this work live in that one folder, **numbered in the order they should be reviewed**: `1-intake.md`, `2-hill.md`, `3-canvas.md`, `4-brief.md`, `5-stories.md`. A reviewer reads the folder top to bottom and gets the argument in the right order.
 4. `bindings.capture` is for **raw source material** only, such as transcripts and stakeholder dumps. If the user supplied raw input worth keeping, file a dated copy there and cite it. Never put the brief itself there.
 5. If `gating.frontmatter` points to a template, prepend that frontmatter to the artefact.
 

@@ -38,7 +38,14 @@ Key mechanics:
 - **Hill Cascade** — macro hills (≤3 per release, read-only register) vs micro hills (day/week iterations, mandatory `ladders_to:`). Same Who/What/Wow grammar, no conflicts by construction.
 - **Decision Records** — one row per decision: driver (business / ux / feasibility / legal), owner, status, options considered, honest consequences.
 - **Repo variables** — `.cairn.yaml` binds a docs repo and a prototype repo, plus artefact paths (`hills`, `personas`, `specs`, `capture`). Works in any setup; unbound types fall back to a `design/` tree.
-- **One folder per piece of work** — `/cairn-intake` proposes a ticket, slug and home folder, you confirm it once, and every later stage writes beside it (`intake.md`, `hill.md`, `canvas.md`, `brief.md`, `stories.md`) instead of re-deriving its own path.
+- **One folder per piece of work, numbered in review order** — `/cairn-intake` proposes a ticket, slug and home folder, you confirm it once, and every later stage writes beside it. The folder listing is the review agenda:
+
+  ```text
+  1-intake.md   2-hill.md   3-canvas.md   4-brief.md   5-stories.md
+  ```
+
+  The hill is always read before the canvas it serves. A missing number is a finding: no `1-intake.md` means the work started from a prototype rather than a stakeholder request.
+
 - **Playback transcripts** are first-class sync input, so the weekly sponsor-user hour lands in the canvas rather than in someone's notebook.
 - **Written for a review meeting.** Artefacts are shaped for four people reading together for twenty minutes, most of them reading English as a second language: one block per decision rather than a wide table, confidence written as known / assumed / unknown rather than letter codes, no cross-references by bare identifier, open questions triaged by criticality, and plain declarative sentences.
 
@@ -70,11 +77,11 @@ Then, in Claude Code / Cursor:
 ```text
 /cairn-intake @stakeholder-request.md
 # … answer the question block …
-/cairn-hill @design/intake/XXX-…-[Intake]-….md
+/cairn-hill @…/1-intake.md
 # … Hill playback …
-/cairn-canvas @…/hill.md
+/cairn-canvas @…/2-hill.md
 # … Spec playback (PR merge) …
-/cairn-handoff @…/canvas.md
+/cairn-handoff @…/3-canvas.md
 # build the prototype from the brief, then:
 /cairn-sync @playback-transcript.md
 ```
