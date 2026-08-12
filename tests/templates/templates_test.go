@@ -343,3 +343,23 @@ func TestTitlesMustBeSelfContainedPlainWords(t *testing.T) {
 		t.Error("cairn-intake: the slug must be derived from the title")
 	}
 }
+
+// /cairn-sync writes into an existing canvas. Asked to run against work that
+// has none, it must say so and route the user, rather than inventing a canvas
+// from meeting notes and skipping the hill that canvas is meant to serve.
+func TestSyncRoutesWhenNoCanvasExists(t *testing.T) {
+	mgr := templates.NewEmbeddedTemplateManager()
+	tmpl, err := mgr.GetByName("cairn-sync")
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, want := range []string{
+		"No canvas exists for this work yet",
+		"/cairn-hill",
+		"Do not create a canvas here",
+	} {
+		if !strings.Contains(tmpl.Content, want) {
+			t.Errorf("cairn-sync: missing the no-canvas path, expected %q", want)
+		}
+	}
+}
