@@ -11,6 +11,7 @@ type TemplateMeta struct {
 	Category    string
 	Stage       string // observe | reflect | make | loop
 	Next        string // legitimate next commands, shown in gate summaries
+	Writes      string // "none" for read-only commands that produce no artefact
 	Description string
 	Content     string
 	Tags        []string
@@ -59,6 +60,8 @@ func ParseFrontmatter(content string) TemplateMeta {
 			meta.Stage = value
 		case "next":
 			meta.Next = value
+		case "writes":
+			meta.Writes = value
 		case "description":
 			meta.Description = value
 		}

@@ -177,6 +177,17 @@ func TestTemplatesForbidGitWritesAtTheGate(t *testing.T) {
 	}
 
 	for _, tmpl := range all {
+		// A read-only command has no artefact to gate or publish. It must
+		// instead be explicit that it writes nothing at all.
+		if tmpl.Writes == "none" {
+			if !strings.Contains(tmpl.Content, "**This command writes nothing.**") {
+				t.Errorf("%s: declares writes: none but does not say so in the body", tmpl.ID)
+			}
+			if strings.Contains(tmpl.Content, "## Publishing (only on explicit request)") {
+				t.Errorf("%s: writes nothing, so it must not offer to publish anything", tmpl.ID)
+			}
+			continue
+		}
 		if !strings.Contains(tmpl.Content, "**Stop there. No git writes.**") {
 			t.Errorf("%s: gate step must forbid git writes", tmpl.ID)
 		}
@@ -360,6 +371,76 @@ func TestSyncRoutesWhenNoCanvasExists(t *testing.T) {
 	} {
 		if !strings.Contains(tmpl.Content, want) {
 			t.Errorf("cairn-sync: missing the no-canvas path, expected %q", want)
+		}
+	}
+}
+
+// Mixing languages inside one sentence produced artefacts a first user called
+// "so funny": "Ein Beschaffer needs a way to seinen Bedarf zu begruenden so
+// that ...". The English sentence pattern has to be translated, not stuffed.
+func TestTemplatesForbidMixedLanguageSentences(t *testing.T) {
+	mgr := templates.NewEmbeddedTemplateManager()
+	all, err := mgr.ListAll()
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	for _, tmpl := range all {
+		if !strings.Contains(tmpl.Content, "Never mix languages inside a sentence") {
+			t.Errorf("%s: missing the one-language-per-sentence rule", tmpl.ID)
+		}
+		// The worked example is what actually teaches the rule.
+		if !strings.Contains(tmpl.Content, "braucht eine Moeglichkeit") {
+			t.Errorf("%s: missing the worked wrong/right language example", tmpl.ID)
+		}
+	}
+
+	// Artefacts that carry a header table must declare their content language.
+	for _, id := range []string{"cairn-intake", "cairn-hill", "cairn-canvas", "cairn-handoff"} {
+		tmpl, err := mgr.GetByName(id)
+		if err != nil {
+			t.Fatal(err)
+		}
+		// Prettier pads table cells, so match the cell prefix, not exact spacing.
+		if !strings.Contains(tmpl.Content, "| Language") {
+			t.Errorf("%s: artefact header must declare the content language", id)
+		}
+	}
+}
+
+// The gaps command explains, it does not decide, and it must not add a sixth
+// numbered file to a work folder whose numbering is the review agenda.
+func TestGapsCommandExplainsWithoutWriting(t *testing.T) {
+	mgr := templates.NewEmbeddedTemplateManager()
+	tmpl, err := mgr.GetByName("cairn-gaps")
+	if err != nil {
+		t.Fatalf("cairn-gaps must be installable by name: %v", err)
+	}
+	if tmpl.Writes != "none" {
+		t.Errorf("cairn-gaps writes = %q, want none", tmpl.Writes)
+	}
+	if tmpl.Category != "Beta" {
+		t.Errorf("cairn-gaps category = %q, want Beta (the five core stages are capped)", tmpl.Category)
+	}
+	for _, want := range []string{
+		"Never close a gap by guessing",
+		"Do not invent a sixth numbered file",
+		"No method jargon without a definition",
+		"Or live with it.",
+	} {
+		if !strings.Contains(tmpl.Content, want) {
+			t.Errorf("cairn-gaps: missing %q", want)
+		}
+	}
+
+	// Beta stays opt-in.
+	available, err := mgr.ListAvailable(detector.ClaudeCode)
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, a := range available {
+		if a.ID == "cairn-gaps" {
+			t.Error("cairn-gaps must not be installed by --all")
 		}
 	}
 }

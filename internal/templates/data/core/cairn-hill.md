@@ -57,13 +57,14 @@ Reframe what Observe collected into a **Hill artefact**: problem statement, need
 ```markdown
 # Hill: {title}
 
-|            |                                                      |
-| ---------- | ---------------------------------------------------- |
-| Work       | {ticket} · `{home folder}` · slug `{slug}`           |
-| Ladders to | {macro id, plus a one-line quote of its What}        |
-| Timeframe  | {day, week or sprint}                                |
-| Entered at | {intake then hill, or hill directly with the reason} |
-| Source     | {intake brief path, or the request quoted}           |
+|            |                                                             |
+| ---------- | ----------------------------------------------------------- |
+| Work       | {ticket} · `{home folder}` · slug `{slug}`                  |
+| Ladders to | {macro id, plus a one-line quote of its What}               |
+| Timeframe  | {day, week or sprint}                                       |
+| Entered at | {intake then hill, or hill directly with the reason}        |
+| Source     | {intake brief path, or the request quoted}                  |
+| Language   | {the content language of this document, for example German} |
 
 Confidence in this document is written as **known** (there is evidence),
 **assumed** (a reasonable guess) or **unknown** (nobody knows yet).
@@ -115,6 +116,11 @@ Your reader is a product owner or an engineer whose first language is probably G
   - Weak: `agentic catalogue in chat` (jargon, and it names the mechanism)
   - Weak: `portfolio upload and facets` ("facets" is an implementation word)
 - One idea per sentence. Prefer a full stop to a semicolon, and a sentence to a subordinate clause.
+- **One language per sentence, and one content language per artefact.** Name the content language in the artefact header. Never mix languages inside a sentence, in either direction.
+  - The sentence patterns in this template are shown in English because the template is English. **Translate the pattern into the content language.** Do not keep the English connectives and drop content into the gaps.
+  - Wrong: `Ein Beschaffer needs a way to seinen Bedarf zu begruenden so that die Sparsamkeit belegt ist`
+  - Right: `Ein Beschaffer braucht eine Moeglichkeit, seinen Bedarf zu begruenden, damit die Sparsamkeit belegt ist`
+  - Furniture stays English: section headings, table column labels, frontmatter keys, and the controlled vocabularies (known, assumed, unknown; proposed, decided, superseded; business, ux, feasibility, legal). These are short, fixed anchors that keep artefacts recognisable and searchable across teams. Give their translation once in the legend if that helps the reader, then use the English term consistently.
 - State facts. Do not argue for them. No rhetorical flourishes, no dramatic framing, no sentence whose job is to sound conclusive.
 - **Never use an em dash.** Use a full stop, a comma, a colon, or brackets.
 - Never use `+` or `-` as connectives in prose. Write the cost as a sentence.

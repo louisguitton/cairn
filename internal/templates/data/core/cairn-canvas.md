@@ -69,13 +69,14 @@ Assemble the **Design Canvas**: the single reviewable contract for a feature. It
 ````markdown
 # Canvas: {title}
 
-|            |                                            |
-| ---------- | ------------------------------------------ |
-| Work       | {ticket} · `{home folder}` · slug `{slug}` |
-| Hill       | **Who** {…} · **What** {…} · **Wow** {…}   |
-| Ladders to | {macro id}                                 |
-| Status     | draft                                      |
-| Sources    | {hill artefact path, playback dates}       |
+|            |                                                             |
+| ---------- | ----------------------------------------------------------- |
+| Work       | {ticket} · `{home folder}` · slug `{slug}`                  |
+| Hill       | **Who** {…} · **What** {…} · **Wow** {…}                    |
+| Ladders to | {macro id}                                                  |
+| Status     | draft                                                       |
+| Sources    | {hill artefact path, playback dates}                        |
+| Language   | {the content language of this document, for example German} |
 
 Confidence in this document is written as **known** (there is evidence),
 **assumed** (a reasonable guess) or **unknown** (nobody knows yet).
@@ -141,6 +142,11 @@ Your reader is a product owner or an engineer whose first language is probably G
   - Weak: `agentic catalogue in chat` (jargon, and it names the mechanism)
   - Weak: `portfolio upload and facets` ("facets" is an implementation word)
 - One idea per sentence. Prefer a full stop to a semicolon, and a sentence to a subordinate clause.
+- **One language per sentence, and one content language per artefact.** Name the content language in the artefact header. Never mix languages inside a sentence, in either direction.
+  - The sentence patterns in this template are shown in English because the template is English. **Translate the pattern into the content language.** Do not keep the English connectives and drop content into the gaps.
+  - Wrong: `Ein Beschaffer needs a way to seinen Bedarf zu begruenden so that die Sparsamkeit belegt ist`
+  - Right: `Ein Beschaffer braucht eine Moeglichkeit, seinen Bedarf zu begruenden, damit die Sparsamkeit belegt ist`
+  - Furniture stays English: section headings, table column labels, frontmatter keys, and the controlled vocabularies (known, assumed, unknown; proposed, decided, superseded; business, ux, feasibility, legal). These are short, fixed anchors that keep artefacts recognisable and searchable across teams. Give their translation once in the legend if that helps the reader, then use the English term consistently.
 - State facts. Do not argue for them. No rhetorical flourishes, no dramatic framing, no sentence whose job is to sound conclusive.
 - **Never use an em dash.** Use a full stop, a comma, a colon, or brackets.
 - Never use `+` or `-` as connectives in prose. `What it costs.` is a sentence, not a minus sign.
@@ -181,4 +187,3 @@ Until they ask, the artefact stays an uncommitted file in the working tree.
 - Structure first: mermaid and tables. Prose is for reasoning. Use drawio (embedded XML) only where mermaid genuinely cannot express the thing.
 - Every canvas serves exactly one hill. A second hill means a second canvas.
 - **Protect the uncomfortable findings.** Contradictions between sources, unmeasured claims, and needs that are really policy requirements all stay visible. A "make it more readable" instruction is the first thing that will erode them, so do not let readability delete a caveat.
-- Content in the user's working language. Keys and labels in English.

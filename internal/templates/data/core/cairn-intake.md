@@ -40,6 +40,8 @@ Turn a raw stakeholder request into an **Intake Brief**: a one-page diagnosis of
 
    > _{user} needs a way to {do a task} so that {they benefit}._
 
+   Render that pattern in the artefact's content language. In German it becomes _{Rolle} braucht eine Moeglichkeit, {Aufgabe}, damit {Nutzen}_. The shape of the statement is what matters, not the English words.
+
    **Enforce the recast rule.** If an idea is expressed in machine terms such as dashboard, click, log in, export or filter, it is a feature rather than a need. Recast it as what the human accomplishes: prioritise, decide, compare, recover, trust. An element you cannot recast is a feature with no user behind it. Flag it. Do not invent a user.
 
 3. **Inventory the four gaps**, plainly, with no editorialising:
@@ -66,6 +68,7 @@ Turn a raw stakeholder request into an **Intake Brief**: a one-page diagnosis of
 | Input class            | {solution-shaped, feature-shaped, outcome-shaped, prototype or transcript} |
 | Original artefact      | {path, or the sentence quoted}                                             |
 | Ladders to (suspected) | {macro hill id, or [TBD]}                                                  |
+| Language               | {the content language of this document, for example German}                |
 
 Confidence in this document is written as **known** (there is evidence),
 **assumed** (a reasonable guess) or **unknown** (nobody knows yet).
@@ -119,6 +122,11 @@ Your reader is a product owner or an engineer whose first language is probably G
   - Weak: `agentic catalogue in chat` (jargon, and it names the mechanism)
   - Weak: `portfolio upload and facets` ("facets" is an implementation word)
 - One idea per sentence. Prefer a full stop to a semicolon, and a sentence to a subordinate clause.
+- **One language per sentence, and one content language per artefact.** Name the content language in the artefact header. Never mix languages inside a sentence, in either direction.
+  - The sentence patterns in this template are shown in English because the template is English. **Translate the pattern into the content language.** Do not keep the English connectives and drop content into the gaps.
+  - Wrong: `Ein Beschaffer needs a way to seinen Bedarf zu begruenden so that die Sparsamkeit belegt ist`
+  - Right: `Ein Beschaffer braucht eine Moeglichkeit, seinen Bedarf zu begruenden, damit die Sparsamkeit belegt ist`
+  - Furniture stays English: section headings, table column labels, frontmatter keys, and the controlled vocabularies (known, assumed, unknown; proposed, decided, superseded; business, ux, feasibility, legal). These are short, fixed anchors that keep artefacts recognisable and searchable across teams. Give their translation once in the legend if that helps the reader, then use the English term consistently.
 - State facts. Do not argue for them. No rhetorical flourishes, no dramatic framing, no sentence whose job is to sound conclusive.
 - **Never use an em dash.** Use a full stop, a comma, a colon, or brackets.
 - Never use `+` or `-` as connectives in prose.
@@ -150,5 +158,4 @@ Until they ask, the artefact stays an uncommitted file in the working tree.
 - No solution language in the brief. This is Observe only.
 - Never fabricate user research. `[TBD]` beats fiction.
 - **Protect the uncomfortable findings.** An element with no user behind it, a gap nobody can fill, a stated need that is really a policy requirement: record them as they are. Do not dress them up.
-- Content in the user's working language. Structure and labels stay in English.
 - Structure first: tables over prose. The only free prose is the quoted request and the top gap.

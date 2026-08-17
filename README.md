@@ -204,14 +204,15 @@ Decisions come back into the canvas with their driver and owner, assumed cells b
 
 ## You do not have to start at the beginning
 
-| Your situation                                                   | Start here                                                                      |
-| ---------------------------------------------------------------- | ------------------------------------------------------------------------------- |
-| A stakeholder sent a request, screenshot or doc                  | `/cairn-intake`                                                                 |
-| You already know the user and the problem                        | `/cairn-hill`                                                                   |
-| Small change, one decision to record                             | `/cairn-canvas`, and note `entered at: canvas (fast lane)`                      |
-| A prototype exists and there is no spec                          | `/cairn-reverse` (beta, see below)                                              |
-| A meeting produced decisions, and this work already has a canvas | `/cairn-sync`                                                                   |
-| A meeting produced decisions, but nothing is written down yet    | `/cairn-hill`, then `/cairn-canvas`. `/cairn-sync` needs a canvas to write into |
+| Your situation                                                        | Start here                                                                      |
+| --------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| A stakeholder sent a request, screenshot or doc                       | `/cairn-intake`                                                                 |
+| You already know the user and the problem                             | `/cairn-hill`                                                                   |
+| Small change, one decision to record                                  | `/cairn-canvas`, and note `entered at: canvas (fast lane)`                      |
+| A prototype exists and there is no spec                               | `/cairn-reverse` (beta, see below)                                              |
+| The intake lists gaps and you are unsure what they mean or what to do | `/cairn-gaps` (beta, see below)                                                 |
+| A meeting produced decisions, and this work already has a canvas      | `/cairn-sync`                                                                   |
+| A meeting produced decisions, but nothing is written down yet         | `/cairn-hill`, then `/cairn-canvas`. `/cairn-sync` needs a canvas to write into |
 
 Entering late is fine, as long as it is recorded rather than silent. Each command asks for what it is missing.
 
@@ -222,6 +223,8 @@ cairn list --beta                 # see what is available
 cairn generate cairn-reverse      # install one by name
 ```
 
+`/cairn-gaps` reads an intake or a hill and explains its gaps in plain language: what is actually missing, why it matters for this specific work, two to four concrete ways to close each one, and what it costs to accept it as a risk instead. It writes nothing, because explaining is the whole job, and it will not guess an answer to make a gap go away.
+
 `/cairn-reverse` reconstructs a draft hill and canvas from an existing prototype. Every reconstructed claim is marked assumed until a playback validates it, and it deliberately writes no `1-intake.md`, because the missing number records that no stakeholder intake ever happened.
 
 ## Design choices worth knowing
@@ -230,6 +233,7 @@ cairn generate cairn-reverse      # install one by name
 - **One folder per piece of work, numbered in review order.** The folder listing is the review agenda, and the hill is always read before the canvas that serves it. A missing number is information.
 - **Decision records, one block each.** Decided, why, what was rejected and why it lost, the honest cost, who owns it. A rejected option with no reason recorded is not a decision, it is a fragment.
 - **Written for a review meeting.** Four people, one screen, twenty minutes, most of them reading English as a second language. So: one block per decision rather than a wide table, confidence spelled out as known, assumed or unknown rather than letter codes, no cross-references by bare identifier, open questions triaged by criticality, one idea per sentence.
+- **One language per sentence.** Artefacts are written in one content language, declared in the header. The sentence patterns in the templates are English because the templates are English, and they get translated rather than filled in: `Ein Beschaffer braucht eine Moeglichkeit, … damit …`, never `Ein Beschaffer needs a way to … so that …`. Headings, column labels and the controlled vocabularies stay English, so artefacts stay recognisable and searchable across teams.
 - **Nothing is fabricated.** An unknown is written as unknown. An empty scenario row means nobody has observed a user yet, and that is a finding rather than a gap to fill in.
 
 ## Companions

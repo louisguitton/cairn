@@ -36,7 +36,7 @@ Convert a signed-off Design Canvas into **handoff artefacts**: a prototype brief
 
 3. **Story set**, if wanted. One story per journey slice the team will build:
 
-   - The grammar is not negotiable. **As a** {persona}, **I want to** {action}, **so that** {goal}. Acceptance criteria as **Given, When, Then** scenarios, covering the happy path and the edge cases that matter.
+   - The grammar is not negotiable, but the language is the content language. **As a** {persona}, **I want to** {action}, **so that** {goal}, with acceptance criteria as **Given, When, Then** scenarios covering the happy path and the edge cases that matter. Write the whole story in one language: in German that is **Als** {Rolle} **moechte ich** {Aktion}, **damit** {Nutzen}, with **Angenommen, Wenn, Dann**. Keep the English keywords only where a tool you feed requires them, and say so if you do.
    - Reference the prototype **by branch and route**, never by screenshot.
    - Each story names its hill and the canvas decisions it implements, **by title as well as number**, so a reader never has to look up a bare code.
    - If the host repo has a story skill or template, emit in that shape so it can be piped straight in.
@@ -48,13 +48,14 @@ Convert a signed-off Design Canvas into **handoff artefacts**: a prototype brief
 ````markdown
 # Brief: {title}
 
-|          |                                                   |
-| -------- | ------------------------------------------------- |
-| Work     | {ticket} · `{home folder}` · slug `{slug}`        |
-| Hill     | {id}: **Wow** {…}                                 |
-| Question | {what this experiment answers}                    |
-| Target   | {proto repo} · branch `{name}` · routes `{/path}` |
-| Fidelity | {mock data, design system, …}                     |
+|          |                                                             |
+| -------- | ----------------------------------------------------------- |
+| Work     | {ticket} · `{home folder}` · slug `{slug}`                  |
+| Hill     | {id}: **Wow** {…}                                           |
+| Question | {what this experiment answers}                              |
+| Target   | {proto repo} · branch `{name}` · routes `{/path}`           |
+| Fidelity | {mock data, design system, …}                               |
+| Language | {the content language of this document, for example German} |
 
 ## Journey slice
 
@@ -87,6 +88,11 @@ Your reader is a product owner or an engineer whose first language is probably G
   - Weak: `agentic catalogue in chat` (jargon, and it names the mechanism)
   - Weak: `portfolio upload and facets` ("facets" is an implementation word)
 - One idea per sentence. Prefer a full stop to a semicolon, and a sentence to a subordinate clause.
+- **One language per sentence, and one content language per artefact.** Name the content language in the artefact header. Never mix languages inside a sentence, in either direction.
+  - The sentence patterns in this template are shown in English because the template is English. **Translate the pattern into the content language.** Do not keep the English connectives and drop content into the gaps.
+  - Wrong: `Ein Beschaffer needs a way to seinen Bedarf zu begruenden so that die Sparsamkeit belegt ist`
+  - Right: `Ein Beschaffer braucht eine Moeglichkeit, seinen Bedarf zu begruenden, damit die Sparsamkeit belegt ist`
+  - Furniture stays English: section headings, table column labels, frontmatter keys, and the controlled vocabularies (known, assumed, unknown; proposed, decided, superseded; business, ux, feasibility, legal). These are short, fixed anchors that keep artefacts recognisable and searchable across teams. Give their translation once in the legend if that helps the reader, then use the English term consistently.
 - State facts. Do not argue for them. No rhetorical flourishes, no dramatic framing, no sentence whose job is to sound conclusive.
 - **Never use an em dash.** Use a full stop, a comma, a colon, or brackets.
 - Never use `+` or `-` as connectives in prose.
