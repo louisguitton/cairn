@@ -86,9 +86,39 @@ go install github.com/louisguitton/cairn/cmd/cairn@latest
 
 The tap ships a Homebrew **cask**, which is macOS-only. On Linux and Windows use `go install`, or take a binary from [Releases](https://github.com/louisguitton/cairn/releases).
 
+### Upgrade
+
+```bash
+brew update && brew upgrade --cask cairn && cairn --version
+```
+
+On other platforms, re-run `go install github.com/louisguitton/cairn/cmd/cairn@latest`.
+
+**Then refresh the templates in each repo that uses cairn:**
+
+```bash
+cd your-project
+cairn generate --all --force     # plus any beta commands you installed
+```
+
+Upgrading the binary does not touch the stage commands already written into
+`.claude/commands/` or `.cursor/commands/`. Those are files in your repo, yours
+to edit, so cairn never overwrites them without `--force`. Until you regenerate,
+you are running the previous version's method.
+
 ## Set up a repo
 
-Run this in the repo you work in day to day, which is usually the prototype.
+### Which repo do I run `init` in?
+
+**Either of the two. Pick the prototype if you have no reason to prefer otherwise**, because that is the repo most people already have open. The choice is not a commitment about where artefacts land: that is what the path bindings decide, and artefacts normally land in the docs repo either way.
+
+The choice is sticky in one respect. `init` writes `.cairn.yaml` into the repo you run it in, and cairn finds that file by searching **upward from the working directory**. So every cairn command has to run from that repo, or from a directory inside it. Run one from the other repo and cairn finds no config, silently falls back to a `design/` tree, and writes your artefact in the wrong place.
+
+`cairn pathcheck` is the check for this. If it prints `bound` rows, you are in the right repo. If rows say `fallback` when you expect bindings, your working directory has drifted.
+
+### Run it
+
+Run this in the repo you chose.
 
 ```bash
 cd your-project
@@ -98,6 +128,31 @@ cairn pathcheck          # prints the table of where each artefact will be writt
 ```
 
 `init` asks before it binds anything. If your docs repo already has a hills file, a personas file and a specs folder, it offers those paths and you confirm them. Existing files are linked, never copied or rewritten. `pathcheck` is the command to run whenever you are unsure where something will land.
+
+### Open both repos side by side
+
+Two repos means switching between them constantly: the canvas is in one, the code is in the other. A VS Code multi-root workspace solves that, and pins the working directory so the config is always found. Save this next to your prototype as `prototype.code-workspace`:
+
+```jsonc
+{
+  // The repo holding .cairn.yaml is listed FIRST on purpose. cairn resolves
+  // .cairn.yaml by searching upward from the working directory, so a terminal
+  // rooted in the docs repo would miss it and fall back to a design/ tree.
+  // terminal.integrated.cwd below keeps every terminal in the right repo.
+  "folders": [
+    { "name": "prototype", "path": "." },
+    { "name": "team-docs", "path": "../team-docs" },
+  ],
+  "settings": {
+    "terminal.integrated.cwd": "${workspaceFolder:prototype}",
+    "search.exclude": { "**/node_modules": true, "**/dist": true },
+  },
+}
+```
+
+Open it with `code prototype.code-workspace`. Both repos appear with their own source control, and `cairn pathcheck` in any integrated terminal reports bound paths rather than fallbacks.
+
+The second folder is a relative path, so it assumes the two repos are siblings on disk. If a colleague clones them elsewhere, that folder shows as missing and they need to adjust it.
 
 Supports **Claude Code**, **Cursor** (slash commands), and **Claude** (`cairn generate --tool claude` emits a skill bundle you upload).
 
