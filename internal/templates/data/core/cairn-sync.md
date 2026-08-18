@@ -42,6 +42,7 @@ If no input is given, ask which of the three exists and stop.
    - Supersede, never delete. A reversed decision keeps its block with status `superseded`, and the new block says which decision replaced it, by title as well as number.
    - Journey: correct the diverging nodes. Change `(assumed)` to `(known)` where the input is evidence. If the prototype diverges from the canvas and no decision anywhere covers it, that is drift, and it becomes an open question.
    - Assumptions that got answered move out of the grid. New ones move in, keyed by short name.
+   - Fog that has cleared graduates: a patch of `Not yet specified` you can now phrase becomes an open question with a criticality, or a decision block. Remove it from the fog section rather than leaving it in both places. Fog that turns out to be beyond the hill moves to `Out of scope`, which is terminal.
    - A decision that crosses systems or is hard to reverse gets `Promote to ADR` in its `Who owns it.` line, targeting `bindings.decisions`.
 
 4. **Route the raw input.** If `bindings.capture` is bound and the transcript or notes are not stored yet, save them there first, dated, and cite that path in Sources.

@@ -211,6 +211,7 @@ Decisions come back into the canvas with their driver and owner, assumed cells b
 | Small change, one decision to record                                  | `/cairn-canvas`, and note `entered at: canvas (fast lane)`                      |
 | A prototype exists and there is no spec                               | `/cairn-reverse` (beta, see below)                                              |
 | The intake lists gaps and you are unsure what they mean or what to do | `/cairn-gaps` (beta, see below)                                                 |
+| The source was long and you want to know what fell out of the canvas  | `/cairn-coverage` (beta, see below)                                             |
 | A meeting produced decisions, and this work already has a canvas      | `/cairn-sync`                                                                   |
 | A meeting produced decisions, but nothing is written down yet         | `/cairn-hill`, then `/cairn-canvas`. `/cairn-sync` needs a canvas to write into |
 
@@ -225,6 +226,8 @@ cairn generate cairn-reverse      # install one by name
 
 `/cairn-gaps` reads an intake or a hill and explains its gaps in plain language: what is actually missing, why it matters for this specific work, two to four concrete ways to close each one, and what it costs to accept it as a risk instead. It writes nothing, because explaining is the whole job, and it will not guess an answer to make a gap go away.
 
+`/cairn-coverage` checks a canvas back against the source material it came from. Every stage compresses, and nothing else in the pipeline ever looks back at the input, so things fall out silently. It sorts each source item into covered, ruled out, or fell out, and leads with how far the check actually reaches, because a coverage report that implies completeness it does not have is worse than none. Run it at the canvas gate, where adding something back is still a cheap edit. It reports and never resolves: what to do with a finding is yours.
+
 `/cairn-reverse` reconstructs a draft hill and canvas from an existing prototype. Every reconstructed claim is marked assumed until a playback validates it, and it deliberately writes no `1-intake.md`, because the missing number records that no stakeholder intake ever happened.
 
 ## Design choices worth knowing
@@ -233,6 +236,8 @@ cairn generate cairn-reverse      # install one by name
 - **One folder per piece of work, numbered in review order.** The folder listing is the review agenda, and the hill is always read before the canvas that serves it. A missing number is information.
 - **Decision records, one block each.** Decided, why, what was rejected and why it lost, the honest cost, who owns it. A rejected option with no reason recorded is not a decision, it is a fragment.
 - **Written for a review meeting.** Four people, one screen, twenty minutes, most of them reading English as a second language. So: one block per decision rather than a wide table, confidence spelled out as known, assumed or unknown rather than letter codes, no cross-references by bare identifier, open questions triaged by criticality, one idea per sentence.
+- **One canvas, one outcome.** Intake asks whether the request fits a single canvas: one Who, one Wow, one journey a team can review in twenty minutes. It never estimates size in days, because that guess would be wrong and would be believed. If the answer is no, it names the pieces and you choose. A request that is three outcomes wearing one name is the most expensive thing to discover at the canvas stage.
+- **Fog is tracked separately from questions.** An open question is one you can phrase. Fog, in the canvas's `Not yet specified`, is what you can tell is coming but cannot phrase sharply yet, and the test between them is whether you can state the question precisely now. Fog graduates into a question or a decision as work proceeds, or turns out to be out of scope, which is terminal.
 - **One language per sentence.** Artefacts are written in one content language, declared in the header. The sentence patterns in the templates are English because the templates are English, and they get translated rather than filled in: `Ein Beschaffer braucht eine Moeglichkeit, … damit …`, never `Ein Beschaffer needs a way to … so that …`. Headings, column labels and the controlled vocabularies stay English, so artefacts stay recognisable and searchable across teams.
 - **Nothing is fabricated.** An unknown is written as unknown. An empty scenario row means nobody has observed a user yet, and that is a finding rather than a gap to fill in.
 

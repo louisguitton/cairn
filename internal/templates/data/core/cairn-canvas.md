@@ -64,6 +64,12 @@ Assemble the **Design Canvas**: the single reviewable contract for a feature. It
 
    **If you have more than about eight open questions, you are listing rather than triaging.** Merge questions that the same person resolves in the same conversation. Drop anything that is really a task.
 
+8. **Not yet specified.** The fog. Decisions you can tell are coming but cannot yet phrase sharply enough to be a question.
+
+   The test is whether you can state the question **precisely now**, not whether you can answer it. If you can phrase it, it is an open question and belongs above, with a criticality. If you can only point at the area, it is fog and belongs here.
+
+   Fog only ever gathers toward this hill. Anything ruled beyond the hill goes to `Out of scope` and never comes back: out of scope is terminal, fog is temporary. As the work proceeds, fog either graduates into an open question or a decision, or it turns out to be out of scope. A patch of fog that graduates disappears from this section rather than living in both places.
+
 ## Artefact grammar (Design Canvas, up to about 400 lines)
 
 ````markdown
@@ -114,6 +120,10 @@ Confidence in this document is written as **known** (there is evidence),
 ## Out of scope
 
 - {what you are not doing, and why in one short clause}
+
+## Not yet specified
+
+- {the area, and what you can tell is coming without being able to phrase it yet}
 
 ## Open questions
 

@@ -22,9 +22,10 @@ Turn a raw stakeholder request into an **Intake Brief**: a one-page diagnosis of
    - **Slug**: three to six kebab-case words lifted from the title. Because it comes from the title it names the outcome, not the mechanism. `agentic-catalogue-in-chat` and `portfolio-upload-and-facets` are the failure to avoid: both name a mechanism in team jargon.
    - **Home**: `{specs}/<existing stream>/<existing epic folder>/<slug>/` when `bindings.specs` is set. List the real subfolders and place the work under the matching one. If unbound, use `design/<slug>/`.
    - Show the full proposed path plus the ticket and slug, then **ask the user to confirm or edit it**. Do not write until they answer.
-3. Write the brief to `<home>/1-intake.md`. All stage artefacts for this work live in that one folder, **numbered in the order they should be reviewed**: `1-intake.md`, `2-hill.md`, `3-canvas.md`, `4-brief.md`, `5-stories.md`. A reviewer reads the folder top to bottom and gets the argument in the right order.
-4. `bindings.capture` is for **raw source material** only, such as transcripts and stakeholder dumps. If the user supplied raw input worth keeping, file a dated copy there and cite it. Never put the brief itself there.
-5. If `gating.frontmatter` points to a template, prepend that frontmatter to the artefact.
+3. If the fit test in step 3 of Steps finds more than one piece of work, propose **one home per piece** and let the user pick which to start with. Do not fold several outcomes into one folder to keep the count down.
+4. Write the brief to `<home>/1-intake.md`. All stage artefacts for this work live in that one folder, **numbered in the order they should be reviewed**: `1-intake.md`, `2-hill.md`, `3-canvas.md`, `4-brief.md`, `5-stories.md`. A reviewer reads the folder top to bottom and gets the argument in the right order.
+5. `bindings.capture` is for **raw source material** only, such as transcripts and stakeholder dumps. If the user supplied raw input worth keeping, file a dated copy there and cite it. Never put the brief itself there.
+6. If `gating.frontmatter` points to a template, prepend that frontmatter to the artefact.
 
 ## Steps
 
@@ -44,16 +45,29 @@ Turn a raw stakeholder request into an **Intake Brief**: a one-page diagnosis of
 
    **Enforce the recast rule.** If an idea is expressed in machine terms such as dashboard, click, log in, export or filter, it is a feature rather than a need. Recast it as what the human accomplishes: prioritise, decide, compare, recover, trust. An element you cannot recast is a feature with no user behind it. Flag it. Do not invent a user.
 
-3. **Inventory the four gaps**, plainly, with no editorialising:
+3. **Does this fit one canvas?** The question is not how big the work is. Never estimate size in days: that guess would be wrong and would be believed. The question is whether this fits **one** canvas, meaning one Who, one Wow, and one journey a team can review in twenty minutes.
+
+   It does not fit when any of these is true:
+
+   - more than one distinct Wow, so success would be measured in two unrelated ways
+   - more than one distinct user, each wanting a different outcome
+   - a journey that branches into flows which could ship separately and independently
+   - you can already see the canvas passing about 400 lines, or more than about eight open questions
+
+   If it does not fit, **name the pieces**. For each one give a candidate title and slug, say what its Wow would be, and say which piece to do first and why. Then ask the user to choose. Never split silently, and never merge silently either: a request that is three outcomes wearing one name is the single most expensive thing to discover at the canvas stage.
+
+   Record the verdict in the brief either way. "Fits one canvas" is a useful thing for a reader to see stated.
+
+4. **Inventory the four gaps**, plainly, with no editorialising:
 
    - **Who** is the user? A role is not enough. What are their tasks, motivations and obstacles?
    - **What** are they trying to accomplish, in their language?
    - **Why** now, and what does the current situation cost them?
    - **Wow**: what would make them say thank you? The differentiator.
 
-4. **Surface assumptions.** At least three. Mark each as **known** (evidence exists), **assumed** (a reasonable guess) or **unknown** (nobody knows yet), spelled out in words. Give each one a short name of two or three words so a reviewer can say it out loud. Never fabricate. Write `[TBD, needs stakeholder, sponsor user or data]` instead.
+5. **Surface assumptions.** At least three. Mark each as **known** (evidence exists), **assumed** (a reasonable guess) or **unknown** (nobody knows yet), spelled out in words. Give each one a short name of two or three words so a reviewer can say it out loud. Never fabricate. Write `[TBD, needs stakeholder, sponsor user or data]` instead.
 
-5. **Pick the single top gap**, then write the question block: five to seven collaborative questions, ready to paste into Slack or email, top gap first. Always include one five-whys chain and one sponsor-user probe, such as "who is one real user we could put this in front of in the next two weeks?".
+6. **Pick the single top gap**, then write the question block: five to seven collaborative questions, ready to paste into Slack or email, top gap first. Always include one five-whys chain and one sponsor-user probe, such as "who is one real user we could put this in front of in the next two weeks?".
 
 ## Artefact grammar (Intake Brief, up to about 120 lines)
 
@@ -83,6 +97,11 @@ Confidence in this document is written as **known** (there is evidence),
 | --------------------------------- | ------------------------------------------------------- |
 | {user} needs a way to … so that … | assumed                                                 |
 | {element that cannot be recast}   | This is a feature with no user behind it. Ask about it. |
+
+## Does this fit one canvas?
+
+{Fits one canvas. Or: no, this is N pieces of work. Then one line per piece with
+its candidate title, its Wow, and which to do first.}
 
 ## Gaps
 

@@ -444,3 +444,103 @@ func TestGapsCommandExplainsWithoutWriting(t *testing.T) {
 		}
 	}
 }
+
+// Size is not estimable, but "does this fit one canvas" is answerable, and the
+// canvas caps are the signal. Intake must ask it before the folder identity is
+// fixed, because a request that is three outcomes wearing one name is most
+// expensive to discover at the canvas stage.
+func TestIntakeAsksWhetherWorkFitsOneCanvas(t *testing.T) {
+	mgr := templates.NewEmbeddedTemplateManager()
+	tmpl, err := mgr.GetByName("cairn-intake")
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, want := range []string{
+		"Does this fit one canvas?",
+		"Never estimate size in days",
+		"more than one distinct Wow",
+		"Never split silently",
+		"one home per piece",
+	} {
+		if !strings.Contains(tmpl.Content, want) {
+			t.Errorf("cairn-intake: fit test missing %q", want)
+		}
+	}
+}
+
+// Fog is what you can sense but cannot yet phrase. Open questions are what you
+// can phrase. Without somewhere to put the former it gets forced into a badly
+// worded question or disappears.
+func TestCanvasSeparatesFogFromOpenQuestions(t *testing.T) {
+	mgr := templates.NewEmbeddedTemplateManager()
+
+	canvas, err := mgr.GetByName("cairn-canvas")
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, want := range []string{
+		"## Not yet specified",
+		"state the question **precisely now**",
+		"out of scope is terminal, fog is temporary",
+	} {
+		if !strings.Contains(canvas.Content, want) {
+			t.Errorf("cairn-canvas: fog handling missing %q", want)
+		}
+	}
+
+	// Fog has to be able to clear, or it just accumulates.
+	sync, err := mgr.GetByName("cairn-sync")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !strings.Contains(sync.Content, "Fog that has cleared graduates") {
+		t.Error("cairn-sync: must graduate cleared fog rather than leaving it to accumulate")
+	}
+}
+
+// Every stage compresses and nothing looked back at the source. Coverage does,
+// and its worth depends entirely on being honest about its own reach.
+func TestCoverageReportsItsOwnReach(t *testing.T) {
+	mgr := templates.NewEmbeddedTemplateManager()
+	tmpl, err := mgr.GetByName("cairn-coverage")
+	if err != nil {
+		t.Fatalf("cairn-coverage must be installable by name: %v", err)
+	}
+	if tmpl.Category != "Beta" {
+		t.Errorf("cairn-coverage category = %q, want Beta", tmpl.Category)
+	}
+	if tmpl.Writes == "none" {
+		t.Error("cairn-coverage writes an artefact, so it must not declare writes: none")
+	}
+	for _, want := range []string{
+		"coverage.md", // unnumbered: not part of the review agenda
+		"**Unnumbered on purpose.**",
+		"## How far this check reaches",
+		"Never imply completeness you do not have",
+		"Fell out", // the three-way outcome
+		"Ruled out",
+		"Covered",
+		"Three questions for", // the ask Jonas wanted
+	} {
+		if !strings.Contains(tmpl.Content, want) {
+			t.Errorf("cairn-coverage: missing %q", want)
+		}
+	}
+	// It reports, it does not resolve.
+	for _, want := range []string{"Never resolve a finding yourself", "Never edit the canvas from this command"} {
+		if !strings.Contains(tmpl.Content, want) {
+			t.Errorf("cairn-coverage: missing the read-only-toward-the-canvas rule %q", want)
+		}
+	}
+
+	// Beta stays opt-in.
+	available, err := mgr.ListAvailable(detector.ClaudeCode)
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, a := range available {
+		if a.ID == "cairn-coverage" {
+			t.Error("cairn-coverage must not be installed by --all")
+		}
+	}
+}
